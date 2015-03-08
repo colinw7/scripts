@@ -1,0 +1,108 @@
+#! /bin/csh -f
+
+source `new_which machine_type`
+source `new_which set_colours`
+
+@ n1 = $#argv
+@ n2 = $n1 - 1
+
+if ($n1 < 2) then
+  \cp $argv[*]
+
+  exit 1
+endif
+
+set dest = $argv[$n1]
+
+if (-d $dest) then
+  set files = ($argv[1-$n2])
+
+  set efiles = ()
+
+  foreach file ($files)
+    if (-e $dest/$file:t) then
+      set efiles = ($efiles $dest/$file:t)
+    endif
+  end
+
+  if ($#efiles > 0) then
+    echo "Confirm Overwrite of Files"
+    echo "${bold}${efiles}${norm}"
+    echo -n "(y/n) : "
+
+    set yes_no = ($<)
+
+    if ($yes_no =~ [Yy]*) then
+      \cp $argv[*]
+    endif
+  else
+    \cp $argv[*]
+  endif
+else
+  if      ($MACHINE_TYPE == sgi) then
+    /bin/sh -c "test -l $dest"
+
+    set rc = $status
+  else if ($MACHINE_TYPE == ibm) then
+    /bin/sh -c "test -d $dest"
+
+    set rc = $status
+  else if ($MACHINE_TYPE == lnx) then
+    /bin/sh -c "test -L $dest"
+
+    set rc = $status
+  else if ($MACHINE_TYPE == amd) then
+    /bin/sh -c "test -L $dest"
+
+    set rc = $status
+  else
+    /bin/sh -c "test -h $dest"
+
+    set rc = $status
+  endif
+
+  if ($rc == 0) then
+    if ($n1 > 2) then
+      \cp $argv[*]
+
+      exit 1
+    endif
+
+    if (-e $argv[1]) then
+      echo -n "Confirm Overwrite of Link ${bold}${dest}${norm} (y/n) : "
+
+      set yes_no = ($<)
+
+      if ($yes_no =~ [Yy]*) then
+        \rm -f $dest
+        \cp $argv[*]
+      endif
+    else
+      \cp $argv[*]
+
+      exit 1
+    endif
+  else
+    if ($n1 > 2) then
+      \cp $argv[*]
+
+      exit 1
+    endif
+
+    if (-e $argv[1] && -e $dest) then
+      echo -n "Confirm Overwrite of File ${bold}${dest}${norm} (y/n) : "
+
+      set yes_no = ($<)
+
+      if ($yes_no =~ [Yy]*) then
+        \cp $argv[*]
+      endif
+    else
+      \cp $argv[*]
+
+      exit 1
+    endif
+  endif
+endif
+
+exit 0

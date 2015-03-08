@@ -1,0 +1,235 @@
+#!/bin/csh -f
+
+source `new_which machine_type`
+source `new_which set_colours`
+
+set args      = ''
+set recursive = "false"
+set prompt    = "true"
+
+while ($#argv > 0)
+  if      ("$1" == "-r") then
+    set recursive = "true"
+    shift
+  else if ("$1" == "-f") then
+    set prompt    = "false"
+    shift
+  else if ("$1" == "-rf" || "$1" == "-fr") then
+    set recursive = "true"
+    set prompt    = "false"
+    shift
+  else
+    set args = ($args $1:q)
+    shift
+  endif
+end
+
+set files = ($args)
+
+set dfiles = ""
+set ofiles = ""
+set lfiles = ""
+
+if ($#files == 1) then
+  if      ($MACHINE_TYPE == sgi) then
+    /bin/sh -c "test -l '$files'"
+
+    set rc = $status
+  else if ($MACHINE_TYPE == ibm) then
+    /bin/sh -c "test -d '$files'"
+
+    set rc = $status
+  else if ($MACHINE_TYPE == lnx) then
+    /bin/sh -c "test -L '$files'"
+
+    set rc = $status
+  else if ($MACHINE_TYPE == amd) then
+    /bin/sh -c "test -L '$files'"
+
+    set rc = $status
+  else
+    /bin/sh -c "test -h '$files'"
+
+    set rc = $status
+  endif
+
+  if ($rc == 0) then
+    set lfiles = $files
+
+    if ("$prompt" == "true") then
+      echo -n "Confirm Delete of Link ${bold}${lfiles}${norm} (y/n) : "
+
+      set yes_no = ($<)
+    else
+      set yes_no = 'y'
+    endif
+  else
+    if (-e $files) then
+      if (-d $files) then
+        set dfiles = $files
+
+        if ("$prompt" == "true") then
+          if ("$recursive" == "true") then
+            echo "Confirm Delete of Directory ${bold}${dfiles}${norm} (y/n) : "
+            echo -n "(Directories will have all files in them deleted) "
+          else
+            echo -n "Confirm Delete of Directory ${bold}${dfiles}${norm} (y/n) : "
+          endif
+
+          set yes_no = ($<)
+        else
+          set yes_no = 'y'
+        endif
+      else
+        set ofiles = $files
+
+        if ("$prompt" == "true") then
+          echo -n "Confirm Delete of ${bold}${ofiles}${norm} (y/n) : "
+
+          set yes_no = ($<)
+        else
+          set yes_no = 'y'
+        endif
+      endif
+    else
+      echo "File ${bold}${files}${norm} does not exist"
+
+      exit 0
+    endif
+  endif
+else
+  foreach file ($files)
+    if      ($MACHINE_TYPE == sgi) then
+      /bin/sh -c "test -l '$file'"
+
+      set rc = $status
+    else if ($MACHINE_TYPE == ibm) then
+      /bin/sh -c "test -d '$file'"
+
+      set rc = $status
+    else if ($MACHINE_TYPE == lnx) then
+      /bin/sh -c "test -L '$file'"
+
+      set rc = $status
+    else if ($MACHINE_TYPE == amd) then
+      /bin/sh -c "test -L '$file'"
+
+      set rc = $status
+    else
+      /bin/sh -c "test -h '$file'"
+
+      set rc = $status
+    endif
+
+    if ($rc == 0) then
+      set lfiles = ($lfiles $file)
+    else
+      if (-e $file) then
+        if (-d $file) then
+          set dfiles = ($dfiles $file)
+        else
+          set ofiles = ($ofiles $file)
+        endif
+      endif
+    endif
+  end
+
+  if ($#dfiles == 0 && $#ofiles == 0 && $#lfiles == 0) then
+    echo "No files to delete"
+
+    exit 0
+  endif
+
+  if ("$prompt" == "true") then
+    echo ""
+    echo "The following files will be deleted :-"
+
+    if ("$recursive" == "true") then
+      echo "(Directories will have all files in them deleted) "
+    endif
+
+    echo ""
+
+    @ count = 0
+
+    echo -n " "
+
+    foreach file ($ofiles)
+      if ($count == 4) then
+        echo ""
+        echo -n "  ${bold}${file}${norm}"
+
+        @ count = 1
+      else
+        echo -n " ${bold}${file}${norm}"
+
+        @ count = $count + 1
+      endif
+    end
+
+    foreach file ($dfiles)
+      if ($count == 4) then
+        echo ""
+        echo -n "  ${bold}${file}${norm} (D)"
+
+        @ count = 1
+      else
+        echo -n " ${bold}${file}${norm} (D)"
+
+        @ count = $count + 1
+      endif
+    end
+
+    foreach file ($lfiles)
+      if ($count == 4) then
+        echo ""
+        echo -n "  ${bold}${file}${norm} (L)"
+
+        @ count = 1
+      else
+        echo -n " ${bold}${file}${norm} (L)"
+
+        @ count = $count + 1
+      endif
+    end
+
+    echo ""
+    echo ""
+
+    echo -n "Confirm Delete (y/n) : "
+
+    set yes_no = ($<)
+
+    echo ""
+  else
+    set yes_no = 'y'
+  endif
+endif
+
+if ($yes_no =~ [Yy]*) then
+  if ("$prompt" == "false") then
+    set opts = "-f"
+  else
+    set opts = ""
+  endif
+
+  foreach file ($ofiles)
+    \rm $opts $file
+  end
+
+  foreach file ($lfiles)
+    \rm $opts $file
+  end
+
+  foreach file ($dfiles)
+    if ("$recursive" == "true") then
+      \rm -r $opts $file
+    else
+      \rmdir $file
+    endif
+  end
+else
+  echo "${bold}Not Deleted${norm}"
+endif
+
+exit 0

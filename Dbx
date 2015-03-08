@@ -1,0 +1,233 @@
+#!/bin/csh -f
+
+if ($#argv < 1) then
+  echo "Usage: Dbx <load_module> <args>"
+  exit 1
+endif
+
+set module      = $1
+set module_name = $module:t
+
+if ($module =~ .* || $module =~ /*) then
+  set module_path = $module
+else
+  set module_path = `new_which $module`
+endif
+
+if ("$module_path" == "") then
+  if (-e $module) then
+    set module_path = $module
+  else
+    echo "$module not found"
+    exit 1
+  endif
+endif
+
+source `new_which machine_type`
+
+if ($MACHINE_TYPE == sun || $MACHINE_TYPE == ibm) then
+  set executable = `file -h $module_path | grep -v script | grep executable | wc -l`
+else
+  set executable = `file -L $module_path | grep -v script | grep executable | wc -l`
+endif
+
+if ($executable == 0) then
+  echo "$module_path in not executable"
+  exit 1
+endif
+
+if      ($MACHINE_TYPE == sgi) then
+  set dbx_prog = "dbx"
+  set dbx_opts = ""
+else if ($MACHINE_TYPE == sun) then
+  set dbx_prog = "dbx"
+  set dbx_opts = ""
+else if ($MACHINE_TYPE == lnx) then
+  set dbx_prog = "gdb"
+  set dbx_opts = ""
+else if ($MACHINE_TYPE == amd) then
+  set dbx_prog = "gdb"
+  set dbx_opts = ""
+else if ($MACHINE_TYPE == ibm) then
+  set dbx_prog = "dbx"
+  set dbx_opts = ""
+else if ($MACHINE_TYPE == osx) then
+  set dbx_prog = "gdb"
+  set dbx_opts = ""
+else
+  set dbx_prog = "xdb"
+  set dbx_opts = ""
+endif
+
+if ("$dbx_prog" == "gdb") then
+  if ($?DBX_TUI) then
+    set dbx_opts = "--tui"
+  endif
+endif
+
+if (-e core && ! -d core) then
+  set core = "core"
+else
+  set core = ""
+endif
+
+set tmpfile1 = $MY_TMP_DIR/$$.dbx.1
+set tmpfile2 = $MY_TMP_DIR/$$.dbx.2
+
+if      ($MACHINE_TYPE == sun) then
+  echo "alias s=step"               >  $tmpfile1
+  echo "alias n=next"               >> $tmpfile1
+  echo "alias c=cont"               >> $tmpfile1
+  echo "alias p=print"              >> $tmpfile1
+  echo "alias q=quit"               >> $tmpfile1
+  echo "alias b='stop'"             >> $tmpfile1
+  echo "alias ba='stop at'"         >> $tmpfile1
+  echo "alias bi='stop in'"         >> $tmpfile1
+  echo "alias r=run"                >> $tmpfile1
+  echo "dbxenv scope_look_aside on" >> $tmpfile1
+  echo "ignore USR1"                >> $tmpfile1
+  echo "ignore USR2"                >> $tmpfile1
+else if ($MACHINE_TYPE == hp7) then
+  echo "def where t" >  $tmpfile1
+  echo "tm"          >> $tmpfile1
+else if ($MACHINE_TYPE == ibm) then
+  echo "alias s step"               >  $tmpfile1
+  echo "alias n next"               >> $tmpfile1
+  echo "alias c cont"               >> $tmpfile1
+  echo "alias p print"              >> $tmpfile1
+  echo "alias q quit"               >> $tmpfile1
+  echo "alias b 'stop'"             >> $tmpfile1
+  echo "alias ba 'stop at'"         >> $tmpfile1
+  echo "alias bi 'stop in'"         >> $tmpfile1
+  echo "alias r run"                >> $tmpfile1
+else
+  echo "" > $tmpfile1
+endif
+
+if (-e .DbxInit) then
+  cat .DbxInit >> $tmpfile1
+endif
+
+if      ($MACHINE_TYPE == sgi) then
+  set dbx_dirs = `DbxDirs $module_name`
+else if ($MACHINE_TYPE == sun) then
+  set dbx_dirs = `DbxDirs $module_name`
+else if ($MACHINE_TYPE == lnx) then
+  set dbx_dirs = `DbxDirs $module_name`
+else if ($MACHINE_TYPE == amd) then
+  set dbx_dirs = `DbxDirs $module_name`
+else if ($MACHINE_TYPE == ibm) then
+  set dbx_dirs = `DbxDirs $module_name`
+else if ($MACHINE_TYPE == osx) then
+  set dbx_dirs = `DbxDirs $module_name`
+else
+  set dbx_dirs = `DbxDirs $module_name`
+endif
+
+set dbx_dirs = ''
+
+set dqt = '"'
+
+set has_args = 0
+
+echo -n "" > $tmpfile2
+
+while ($#argv > 1)
+  echo -n " ${dqt}$argv[2]${dqt}" >> $tmpfile2
+
+  shift
+
+  set has_args = 1
+end
+
+if ($has_args == 1) then
+  if ("$core" != "core") then
+    if      ($MACHINE_TYPE == sgi) then
+      echo "stop in main" >> $tmpfile1
+
+      echo -n "run " >> $tmpfile1
+    else if ($MACHINE_TYPE == sun) then
+      set cmd = "stop in main; run $argv[2-]"
+    else if ($MACHINE_TYPE == ibm) then
+      echo "stop in main" >> $tmpfile1
+
+      echo -n "run " >> $tmpfile1
+    else if ($MACHINE_TYPE == osx) then
+      echo "stop in main" >> $tmpfile1
+
+      echo -n "run " >> $tmpfile1
+    else
+      echo "b main" >> $tmpfile1
+
+      echo -n "run " >> $tmpfile1
+    endif
+
+    cat $tmpfile2 >> $tmpfile1
+
+    echo "" >> $tmpfile1
+  else
+    set cmd = "cd ."
+  endif
+
+  if      ($MACHINE_TYPE == sgi) then
+    $dbx_prog $dbx_opts -c $tmpfile1 -I . $dbx_dirs $module_path $core
+  else if ($MACHINE_TYPE == sun) then
+    $dbx_prog $dbx_opts -s $tmpfile1 -c $cmd:q -I. $dbx_dirs $module_path $core
+  else if ($MACHINE_TYPE == lnx) then
+    $dbx_prog $dbx_opts -x $tmpfile1 $dbx_dirs $module_path -directory . $core
+  else if ($MACHINE_TYPE == amd) then
+    $dbx_prog $dbx_opts -x $tmpfile1 $dbx_dirs $module_path -directory . $core
+  else if ($MACHINE_TYPE == ibm) then
+    $dbx_prog $dbx_opts -c $tmpfile1 -d 256 -I . $dbx_dirs $module_path $core
+  else if ($MACHINE_TYPE == osx) then
+    $dbx_prog $dbx_opts -x $tmpfile1 $dbx_dirs $module_path -directory . $core
+  else
+    $dbx_prog $dbx_opts $module_path -p $tmpfile1 -d . $dbx_dirs $core
+  endif
+else
+  if ("$core" != "core") then
+    if      ($MACHINE_TYPE == sgi) then
+      echo "stop in main" >> $tmpfile1
+      echo "run" >> $tmpfile1
+    else if ($MACHINE_TYPE == sun) then
+      set cmd = "stop in main; run"
+    else if ($MACHINE_TYPE == ibm) then
+      echo "stop in main" >> $tmpfile1
+      echo "run" >> $tmpfile1
+    else if ($MACHINE_TYPE == osx) then
+      echo "stop in main" >> $tmpfile1
+      echo "run" >> $tmpfile1
+    else
+      echo "b main" >> $tmpfile1
+      echo "run" >> $tmpfile1
+    endif
+  else
+    set cmd = "cd ."
+  endif
+
+  if      ($MACHINE_TYPE == sgi) then
+    $dbx_prog $dbx_opts -c $tmpfile1 -I . $dbx_dirs $module_path $core
+  else if ($MACHINE_TYPE == sun) then
+    $dbx_prog $dbx_opts -s $tmpfile1 -c $cmd:q -I. $dbx_dirs $module_path $core
+  else if ($MACHINE_TYPE == lnx) then
+    $dbx_prog $dbx_opts -x $tmpfile1 $dbx_dirs $module_path -directory . $core
+  else if ($MACHINE_TYPE == amd) then
+    $dbx_prog $dbx_opts -x $tmpfile1 $dbx_dirs $module_path -directory . $core
+  else if ($MACHINE_TYPE == ibm) then
+    $dbx_prog $dbx_opts -c $tmpfile1 -d 256 -I . $dbx_dirs $module_path $core
+  else if ($MACHINE_TYPE == osx) then
+    $dbx_prog $dbx_opts -x $tmpfile1 $dbx_dirs $module_path -directory . $core
+  else
+    $dbx_prog $dbx_opts $module_path -p $tmpfile1 -d . $dbx_dirs $core
+  endif
+endif
+
+if (-e core && ! -d core) then
+  rm -f core
+endif
+
+rm -f $tmpfile1
+rm -f $tmpfile2
+rm -f ~/.xdbhist
+
+exit 0

@@ -1,0 +1,37 @@
+#!/bin/csh -f
+
+set recurse = 0
+
+set args = ""
+
+while ($#argv > 0)
+  if      ("$1" == "-r") then
+    set recurse = 1
+    shift
+  else
+    set args = ($args $1:q)
+    shift
+  endif
+end
+
+set files = `Cls --nocolor --include l $args`
+
+if ($#files > 0) then
+  rm $files
+endif
+
+if ($recurse == 1) then
+  set dirs  = `Cls --nocolor --include d $args`
+
+  foreach dir ($dirs)
+    set cdir = `pwd`
+
+    cd $dir
+
+    rm_links -r
+
+    cd $cdir
+  end
+endif
+
+exit 0

@@ -1,0 +1,39 @@
+#!/bin/csh -f
+
+@ depth = 0
+
+if ($#argv) then
+  @ depth = $1
+
+  if ($depth > 8) then
+    set pwd = `pwd`
+    echo "Too deep - $pwd"
+    exit 0
+  endif
+endif
+
+@ depth1 = $depth + 1
+
+set nonomatch
+
+foreach file (* .??*)
+  if (-d "$file") then
+    set pwd = `pwd`
+
+    cd $file
+
+    rm_empty_dirs $depth1
+
+    cd $pwd
+
+    set dir = `Cls --nocolor --empty_dirs $file`
+
+    if ($dir != "") then
+      echo "Remove empty dir $pwd/$file"
+
+      rmdir $file >&! /dev/null
+    endif
+  endif
+end
+
+exit 0

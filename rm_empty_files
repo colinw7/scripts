@@ -1,0 +1,19 @@
+#!/bin/csh -f
+
+set nonomatch
+
+foreach file (* .??*)
+  if (-d "$file") then
+    set pwd = `pwd`
+
+    cd $file
+
+    rm `Cls -z --nocolor`
+
+    rm_empty_files
+
+    cd $pwd
+  endif
+end
+
+exit 0

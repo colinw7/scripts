@@ -1,0 +1,11 @@
+#!/bin/csh -f
+
+CConcat $* > .all
+
+vi .all
+
+CUnconcat .all
+
+#rm .all
+
+exit 0

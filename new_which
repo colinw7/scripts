@@ -1,0 +1,106 @@
+#!/bin/csh -f
+
+set all      = 0
+set alias    = 0
+set silent   = 0
+set follow   = 0
+set files    = ''
+set got_file = 0
+
+while ($#argv > 0)
+  if      ("$1" == "-a") then
+    set all = 1
+    shift
+  else if ("$1" == "-l") then
+    set alias = 1
+    shift
+  else if ("$1" == "-s") then
+    set silent = 1
+    shift
+  else if ("$1" == "-f") then
+    set follow = 1
+    shift
+  else
+    set files = ($files $1)
+    set got_file = 1
+    shift
+  endif
+end
+
+if ($silent == 0) then
+  set Echo = echo
+else
+  set Echo = 'set temp ='
+endif
+
+if ($got_file == 0) then
+  echo "Usage: $0 [-als] <files>"
+  exit 1
+endif
+
+if ($all == 0 && $#files == 1) then
+  if ("$files" =~ /*) then
+    $Echo $files
+    exit 0
+  endif
+
+  if ($alias == 1) then
+    foreach al (`alias | awk '{print $1}'`)
+      if ($al == $files) then
+        $Echo "Alias: $al"
+        exit 0
+      endif
+    end
+  endif
+
+  foreach dir ($path)
+    if (-e $dir/$files && -x $dir/$files) then
+      if ($follow == 1) then
+        is_link $dir/$files
+
+        if ($status == 1) then
+          set lfile = `\ls -l $dir/$files | awk '{print $NF}'`
+
+          $Echo $lfile
+        else
+          $Echo $dir/$files
+        endif
+      else
+        $Echo $dir/$files
+      endif
+
+      exit 0
+    endif
+  end
+
+  exit 1
+else
+  if ($alias == 1) then
+    foreach file ($files)
+      if ("$file" =~ /*) then
+        break
+      endif
+
+      foreach al (`awk '{print $1}'`)
+        if ($al == $files) then
+          $Echo "Alias: $al"
+        endif
+      end
+    end
+  endif
+
+  foreach file ($files)
+    if ($file =~ "/*") then
+      $Echo $file
+      continue
+    endif
+
+    foreach dir ($path)
+      if (-e $dir/$file && -x $dir/$file) then
+        $Echo $dir/$file
+      endif
+    end
+  end
+
+  exit 0
+endif

@@ -1,0 +1,5 @@
+#!/bin/csh -f
+
+Cls -R --full_path --bad_names --quiet
+
+exit 0

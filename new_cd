@@ -1,0 +1,17 @@
+#!/bin/csh -f
+
+sudo umount /cdrom >& /dev/null
+
+set nl = `mount | grep cdrom | wc -l`
+
+if ($nl != 0) then
+  echo "Unmount Failed"
+  exit 1
+endif
+
+echo -n "Enter New CD "
+set reply = $<
+
+sudo mount /dev/hdd /cdrom -t iso9660 >& /dev/null
+
+exit

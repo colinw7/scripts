@@ -1,0 +1,233 @@
+#!/bin/csh -f
+
+#set verbose
+#set echo
+
+source `new_which machine_type`
+source `new_which set_colours`
+
+# Extract Options
+
+set only_diff   = 0
+set newer       = 0
+set nozero      = 0
+set delsrc      = 0
+set deldest     = 0
+set force       = 0
+set match       = 0
+set short       = 0
+set short_nl    = 0
+set mv_cmd      = 0
+set ignore_link = 1
+set diff        = 0
+
+set options   = ""
+set args      = ""
+set delfiles  = ()
+set save_opts = ""
+
+while ($#argv > 0)
+  if      ("$1" == "-diff") then
+    set only_diff = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-newer") then
+    set newer     = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-mv_cmd") then
+    set mv_cmd    = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-nozero") then
+    set nozero    = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-delsrc") then
+    set delsrc    = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-deldest") then
+    set deldest   = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-match") then
+    set match     = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-short") then
+    set short     = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-f") then
+    set force = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-L") then
+    set ignore_link = 0
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-D") then
+    set diff = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" =~ -?) then
+    set options   = ($options   $1:q)
+    set save_opts = ($save_opts $1:q)
+    shift
+  else
+    set args = ($args $1:q)
+    shift
+  endif
+end
+
+@ n1 = $#args
+@ n2 = $n1 - 1
+
+if ($n1 < 2) goto error
+
+set dest = $args[$n1]
+
+if (! -d $dest) goto error
+
+@ n21 = 1
+@ n22 = $n2
+
+again:
+
+if ($n22 - $n21 > 20) then
+  @ n22 = $n21 + 20
+endif
+
+set files = "$args[$n21-$n22]"
+
+foreach file ($files)
+  if ($nozero == 1 && -z $file) continue
+
+  if ($ignore_link) then
+    is_link $file
+
+    if ($status == 1) then
+#     echo "Ignore link $file"
+      continue
+    endif
+  endif
+
+  if (-e $dest/$file) then
+    if ($ignore_link) then
+      is_link $dest/$file
+
+      if ($status == 1) then
+#       echo "Ignore link $dest/$file"
+        continue
+      endif
+    endif
+
+    if (-d $dest/$file) then
+      set files1 = `\sh -c "ls -d $file/* $file/.??* 2>/dev/null"`
+
+      if ($#files1 != 0) then
+        cmp_files $save_opts $files1 $dest
+      endif
+    else
+      if ($newer == 1) then
+        newer $file $dest/$file
+
+        if ($status == 0) then
+          if      ($mv_cmd == 1) then
+            echo "mv $file $dest"
+          else if ($only_diff == 0) then
+            if ($short == 0) then
+              echo "${norm}Newer $file${norm}"
+            endif
+          endif
+
+          if      ($delsrc == 1) then
+            if ($force == 1) then
+              rm -f $file
+            else
+              set delfiles = ($delfiles $file)
+            endif
+          else if ($deldest == 1) then
+            if ($force == 1) then
+              rm -f $dest/$file
+            else
+              set delfiles = ($delfiles $dest/$file)
+            endif
+          endif
+        else
+          if ($short == 0) then
+            echo "${bold}Older $file${norm}"
+          else
+            echo -n "$file "
+            set short_nl = 1
+          endif
+        endif
+      else
+        cmp -s $options $file:q $dest/$file
+
+        if ($status == 0) then
+          if ($only_diff == 0) then
+            if ($short == 0) then
+              echo "${norm}Identical $file${norm}"
+            endif
+          endif
+
+          if      ($delsrc == 1) then
+            if ($force == 1) then
+              rm -f $file
+            else
+              set delfiles = ($delfiles $file)
+            endif
+          else if ($deldest == 1) then
+            if ($force == 1) then
+              rm -f $dest/$file
+            else
+              set delfiles = ($delfiles $dest/$file)
+            endif
+          endif
+        else
+          if ($short == 0) then
+            echo "${bold}Different $file${norm}"
+
+            if ($diff == 1) then
+              diff $file:q $dest/$file
+            endif
+          else
+            echo -n "$file "
+            set short_nl = 1
+          endif
+        endif
+      endif
+    endif
+  else
+    if ($match == 0) then
+      if ($short == 0) then
+        echo "${bold}---- No match for $file ----${norm}"
+      endif
+    endif
+  endif
+end
+
+if ($n22 != $n2) then
+  @ n21 = $n22 + 1
+  @ n22 = $n2
+
+  goto again
+endif
+
+if ($short_nl == 1) then
+  echo ""
+endif
+
+if ($#delfiles != 0) then
+  new_rm $delfiles
+endif
+
+exit 0
+
+error:
+
+echo "Usage : cmp_files [-diff] <files> <directory>"
+
+exit 1

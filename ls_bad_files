@@ -1,0 +1,5 @@
+#!/bin/csh -f
+
+Cls --full_path -R --include B --nocolor
+
+exit 0

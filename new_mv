@@ -1,0 +1,154 @@
+#!/bin/csh -f
+
+source `new_which machine_type`
+source `new_which set_colours`
+
+set args   = ''
+set prompt = "true"
+set new    = "false"
+
+while ($#argv > 0)
+  if      ("$1" == "-f") then
+    set prompt = "false"
+    shift
+  else if ("$1" == "-n") then
+    set new = "true"
+    shift
+  else
+    set args = ($args $1)
+    shift
+  endif
+end
+
+set files = ($args)
+
+@ n1 = $#files
+@ n2 = $n1 - 1
+
+if ($n1 < 2) then
+  \mv $files[*]
+
+  exit 1
+endif
+
+set dest = $files[$n1]
+
+if (-d $dest) then
+  set sfiles = ($files[1-$n2])
+
+  set efiles = ()
+  set nfiles = ()
+
+  foreach file ($sfiles)
+    if (-e $file && -e $dest/$file:t) then
+      set efiles = ($efiles $dest/$file:t)
+    else
+      set nfiles = ($nfiles $file)
+    endif
+  end
+
+  if ("$new" == "false") then
+    if ($#efiles > 0) then
+      if ("$prompt" == "true") then
+        echo "Confirm Overwrite of Files"
+        echo "${bold}${efiles}${norm}"
+        echo -n "(y/n) : "
+
+        set yes_no = ($<)
+      else
+        set yes_no = 'y'
+      endif
+
+      if ($yes_no =~ [Yy]*) then
+        \mv $files[*]
+      endif
+    else
+      \mv $files[*]
+    endif
+  else
+    \mv $nfiles $dest
+  endif
+else
+  if      ($MACHINE_TYPE == sgi) then
+    /bin/sh -c "test -l $dest"
+
+    set rc = $status
+  else if ($MACHINE_TYPE == ibm) then
+    /bin/sh -c "test -d $dest"
+
+    set rc = $status
+  else if ($MACHINE_TYPE == lnx) then
+    /bin/sh -c "test -L $dest"
+
+    set rc = $status
+  else if ($MACHINE_TYPE == amd) then
+    /bin/sh -c "test -L $dest"
+
+    set rc = $status
+  else
+    /bin/sh -c "test -h $dest"
+
+    set rc = $status
+  endif
+
+  if ($rc == 0) then
+    if ($n1 > 2) then
+      \mv $files[*]
+
+      exit 1
+    endif
+
+    if (-e $files[1]) then
+      if ("$new" == "false") then
+        if ("$prompt" == "true") then
+          echo -n "Confirm Overwrite of Link ${bold}${dest}${norm} (y/n) : "
+
+          set yes_no = ($<)
+        else
+          set yes_no = 'y'
+        endif
+      else
+        set yes_no = 'n'
+      endif
+
+      if ($yes_no =~ [Yy]*) then
+        \rm -f $dest
+        \mv $files[*]
+      endif
+    else
+      \mv $files[*]
+
+      exit 1
+    endif
+  else
+    if ($n1 > 2) then
+      \mv $files[*]
+
+      exit 1
+    endif
+
+    if (-e $files[1] && -e $dest) then
+      if ("$new" == "false") then
+        if ("$prompt" == "true") then
+          echo -n "Confirm Overwrite of File ${bold}${dest}${norm} (y/n) : "
+
+          set yes_no = ($<)
+        else
+          set yes_no = 'y'
+        endif
+      else
+        set yes_no = 'n'
+      endif
+
+      if ($yes_no =~ [Yy]*) then
+        \mv $files[*]
+      endif
+    else
+      \mv $files[*]
+
+      exit 1
+    endif
+  endif
+endif
+
+exit 0

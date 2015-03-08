@@ -1,0 +1,19 @@
+#!/bin/csh -f
+
+if ($#argv != 2) then
+  echo "Usage: tar_copy <src> <dst>"
+  exit 1
+endif
+
+set src = $1
+set dst = $2
+
+cd $dst
+
+set dst = `pwd`
+
+cd $src
+
+tar cf - * .??* | ( cd $dst; tar xfp -)
+
+exit 0

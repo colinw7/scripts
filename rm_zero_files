@@ -1,0 +1,10 @@
+#!/bin/csh -f
+
+if ($#argv != 0) then
+  echo "rm_zero_files"
+  exit 1
+endif
+
+Cls --quiet -R --zero --exec "rm %p"
+
+exit 0

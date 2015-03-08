@@ -1,0 +1,200 @@
+#!/bin/csh -f
+
+#set verbose
+#set echo
+
+set tmp_dir = $MY_TMP_DIR
+
+source `new_which machine_type`
+source `new_which set_colours`
+
+# Extract Options
+
+set only_diff = 0
+set count     = 0
+set nolink    = 0
+set match     = 0
+set pattern   = ""
+set show_date = 0
+
+set options   = ""
+set args      = ""
+set save_opts = ""
+
+while ($#argv > 0)
+  if      ("$1" == "-diff") then
+    set only_diff = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-count") then
+    set count = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-nolink") then
+    set nolink = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-match") then
+    set match     = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-pattern") then
+    set save_opts = ($save_opts $1:q)
+    shift
+
+    set pattern   = $1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-bw") then
+    set options   = ($options   $1:q)
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-show_date") then
+    set show_date = 1
+    set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" =~ -?) then
+    set options   = ($options   $1:q)
+    set save_opts = ($save_opts $1:q)
+    shift
+  else
+    set args = ($args $1:q)
+    shift
+  endif
+end
+
+@ n1 = $#args
+@ n2 = $n1 - 1
+
+if ($n1 < 2) goto error
+
+if ($n1 == 2 && -d $args[1] && -d $args[2]) then
+  set rel1 = `echo $args[1] | grep '^/' | wc -l`
+  set rel2 = `echo $args[2] | grep '^/' | wc -l`
+
+  if ($rel1 == 1 && $rel2 == 1) then
+    set save_cwd = `pwd`
+
+    cd $args[1]
+
+    set dest = $save_cwd/$args[2]
+
+    set args = `ls *`
+
+    @ n21 = 1
+    @ n22 = $#args
+  else
+    set dest = $args[$n1]
+
+    if (! -d $dest) goto error
+
+    @ n21 = 1
+    @ n22 = $n2
+  endif
+else
+  set dest = $args[$n1]
+
+  if (! -d $dest) goto error
+
+  @ n21 = 1
+  @ n22 = $n2
+endif
+
+again:
+
+if ($n22 - $n21 > 20) then
+  @ n22 = $n21 + 20
+endif
+
+set files = "$args[$n21-$n22]"
+
+foreach file ($files)
+  if ($nolink == 1) then
+    /bin/sh -c "test -h '$file'"
+
+    if ($status == 0) continue
+  endif
+
+  if (-e $dest/$file) then
+    if (-d $dest/$file) then
+      set files1 = `\sh -c "ls -d $file/* 2>/dev/null"`
+
+      if ($#files1 != 0) then
+        diff_files $save_opts $files1 $dest
+      endif
+    else
+      if ("$pattern" != "") then
+        set n = `echo $pattern | grep $file | wc -l`
+
+        if ($n == 0) then
+          continue
+        endif
+      endif
+
+      if ($only_diff == 1) then
+        diff $options $file $dest/$file > $tmp_dir/$$.diff
+
+        if (! -z $tmp_dir/$$.diff) then
+          if ($count == 1) then
+            echo -n "${bold}$file${norm}"
+            diff $options $file $dest/$file | grep '^>' | wc -l
+          else
+            echo "${bold}---- $file ----${norm}"
+
+            if ($show_date == 1) then
+              echo -n "$file : "
+              Cls --format '%d' $file
+              echo -n "$dest/$file : "
+              Cls --format '%d' $dest/$file
+              echo "----"
+            endif
+
+            diff $options $file $dest/$file
+            echo "${bold}---- $file ----${norm}"
+            echo ""
+          endif
+        endif
+
+        rm -f $tmp_dir/$$.diff
+      else
+        if ($count == 1) then
+          echo -n "${bold}$file${norm}"
+          diff $options $file $dest/$file | grep '^>' | wc -l
+        else
+          echo "${bold}---- $file ----${norm}"
+
+          if ($show_date == 1) then
+            echo -n "$file : "
+            Cls --format '%d' $file
+            echo -n "$dest/$file : "
+            Cls --format '%d' $dest/$file
+            echo "----"
+          endif
+
+          diff $options $file $dest/$file
+          echo "${bold}---- $file ----${norm}"
+          echo ""
+        endif
+      endif
+    endif
+  else
+    if ($match == 0) then
+      echo "${bold}---- No match for $file ----${norm}"
+    endif
+  endif
+end
+
+if ($n22 != $n2) then
+  @ n21 = $n22 + 1
+  @ n22 = $n2
+
+  goto again
+endif
+
+exit 0
+
+error:
+
+echo "Usage : diff_files [-diff] <files> <directory>"
+
+exit 1

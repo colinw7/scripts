@@ -1,0 +1,46 @@
+#!/bin/csh -f
+
+# rm `ls -R --include B --exec 'echo "%p"' --quiet`
+
+set report = 1
+
+set nonomatch
+
+if ($#argv == 0) then
+  set files = `echo * .??*`
+else
+  set files = ($argv)
+endif
+
+foreach file ($files)
+  if ("$file" == "*" || "$file" == ".??*") then
+    continue
+  endif
+
+  if (-d "$file") then
+    is_link "$file"
+
+    if ($status == 1) continue
+
+    set pwd = `pwd`
+
+    cd $file
+
+    rm_bad_files
+
+    cd $pwd
+  else
+    set files = `Cls --nocolor --include B --exclude d $file`
+
+    if ($#files > 0) then
+      if ("$report" == "1") then
+        set pwd = `pwd`
+        echo "remove bad files - $pwd/$files"
+      endif
+
+      rm -rf $files
+    endif
+  endif
+end
+
+exit 0
