@@ -11,6 +11,11 @@ else
   exit 1
 endif
 
+if (! -e "$src" || ! -e "$dst") then
+  echo "$src or $dst does not exist"
+  exit 1
+endif
+
 cd $src
 
 foreach f (*)

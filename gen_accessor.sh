@@ -1,16 +1,34 @@
 #!/bin/csh -f
 
-if ($#argv != 2) then
-  echo "Usage: gen_modifier <type> <name>"
+set type = ''
+set name = ''
+set ptr  = 0
+set args = ()
+
+while ($#argv > 0)
+  if      ("$1" == "-p") then
+    set ptr = 1
+    shift
+  else if ("$type" == "") then
+    set type = $1
+    shift
+  else if ("$name" == "") then
+    set name = $1
+    shift
+  else
+    set args = ($args $1)
+    shift
+  endif
+end
+
+if ("$name" == "" || "$type" == "") then
+  echo "Usage: gen_accessor.sh [-p] <type> <name>"
   exit 1
 endif
 
-set type = $1
-set name = $2
-
 set basic = 0
 
-if ($type == "bool" || $type == "int" || $type == "double") then
+if ("$type" == "bool" || "$type" == "int" || "$type" == "double") then
   set basic = 1
 endif
 
@@ -22,7 +40,11 @@ set var = "${name1}_"
 set setter = "set${name2}"
 set getter = "${name1}"
 
-set tmpVar = "v";
+if ($ptr == 0) then
+  set tmpVar = "v";
+else
+  set tmpVar = "p";
+endif
 
 if ($basic == 1) then
   if ($type == "bool") then
@@ -32,13 +54,25 @@ if ($basic == 1) then
     set tmpVar = "i";
   else if ($type == "double") then
     set tmpVar = "r";
+  else if ($type == "std::string" || $type == "string") then
+    set tmpVar = "s";
   endif
 
-  echo "  ${type} ${getter}() const { return ${var}; }"
-  echo "  void ${setter}(${type} ${tmpVar}) { ${var} = ${tmpVar}; }"
+  if ($ptr == 0) then
+    echo "  ${type} ${getter}() const { return ${var}; }"
+    echo "  void ${setter}(${type} ${tmpVar}) { ${var} = ${tmpVar}; }"
+  else
+    echo "  const ${type} *${getter}() const { return ${var}; }"
+    echo "  void ${setter}(${type} *${tmpVar}) { ${var} = ${tmpVar}; }"
+  endif
 else
-  echo "  const ${type} &${getter}() const { return ${var}; }"
-  echo "  void ${setter}(const ${type} &${tmpVar}) { ${var} = ${tmpVar}; }"
+  if ($ptr == 0) then
+    echo "  const ${type} &${getter}() const { return ${var}; }"
+    echo "  void ${setter}(const ${type} &${tmpVar}) { ${var} = ${tmpVar}; }"
+  else
+    echo "  const ${type} *${getter}() const { return ${var}; }"
+    echo "  void ${setter}(${type} *${tmpVar}) { ${var} = ${tmpVar}; }"
+  endif
 endif
 
 exit 0
