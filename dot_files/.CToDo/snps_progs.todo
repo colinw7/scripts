@@ -1,0 +1,13 @@
+<todo>
+<subject name="CCIXml">
+<section name="New Section">
+<item>
+TODO
+. Auto generate command regression
+. Add command option constraints for integer, real, ... args
+. Standalone version checkin
+
+</item>
+</section>
+</subject>
+</todo>

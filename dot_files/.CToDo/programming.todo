@@ -1,0 +1,35 @@
+<todo>
+<subject name="Design Patterns">
+<section name="Singleton">
+<item name='' type='text' x='9' y='26' width='320' height='287'>
+Acquire and Release resource only once.
+
+Need to control acquire (on demand) and release.
+
+~/progs/misc/include/CSingleton.h
+
+Need to use in more places.
+</item>
+</section>
+<section name="Facade">
+<item name='' type='text' x='9' y='30' width='303' height='200'>
+A wrapper class to provide a controlled interface to sub-classes that you don't want to expose
+
+e.g. if you have classes B1, B2, B3 you can create a single class B which exposes only the functions in B1, B2, B3 that are needed.
+
+</item>
+</section>
+<section name="State">
+<item name='' type='text' x='9' y='25' width='324' height='221'>
+Model a State Machine using objects for each state and a manager object to transition between states.
+
+</item>
+</section>
+<section name="Factory">
+<item name='' type='text' x='10' y='25' width='240' height='209'>
+Allow classes to be created parametrically instead of using 'new'. This allows the create routine to be virtual.
+
+</item>
+</section>
+</subject>
+</todo>

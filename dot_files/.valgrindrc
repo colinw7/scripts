@@ -1,0 +1,3 @@
+-v
+--demangle=yes
+memcheck:--suppressions=/home/colinw/.valgrind.suppressions

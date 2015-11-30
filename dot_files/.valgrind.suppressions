@@ -1,0 +1,281 @@
+{
+   ld_so_1
+   Memcheck:Cond
+   obj:/lib/ld-2.3.5.so
+}
+
+{
+   ld_so_1
+   Memcheck:Cond
+   obj:/lib/ld-2.4.so
+}
+
+{
+   ld_so_2
+   Memcheck:Addr4
+   obj:/lib/ld-2.3.5.so
+}
+
+{
+   XlcResolveLocaleName_1
+   Memcheck:Leak
+   fun:malloc
+   fun:_XlcResolveLocaleName
+}
+
+{
+   XlcCreateLC1
+   Memcheck:Leak
+   fun:malloc
+   fun:_XlcCreateLC
+}
+
+{
+   X11TransConnectDisplay1
+   Memcheck:Leak
+   fun:malloc
+   fun:_X11TransConnectDisplay
+}
+
+{
+   XrmDefaultInitParseInfo1
+   Memcheck:Leak
+   fun:malloc
+   fun:_XrmDefaultInitParseInfo
+}
+
+{
+   X11TransWrite1
+   Memcheck:Param
+   write(buf)
+   obj:/lib/ld-2.3.6.so
+   fun:_X11TransWrite
+}
+
+{
+   X11TransWrite1
+   Memcheck:Param
+   write(buf)
+   obj:/lib/ld-2.4.so
+   fun:_X11TransWrite
+}
+
+{
+   X11TransSocketWritev1
+   Memcheck:Param
+   writev(vector[...])
+   obj:/lib/ld-2.3.6.so
+   fun:_X11TransSocketWritev
+   fun:_X11TransWritev
+}
+
+{
+   X11TransSocketWritev2
+   Memcheck:Param
+   writev(vector[...])
+   obj:/lib/ld-2.4.so
+   fun:_X11TransSocketWritev
+   fun:_X11TransWritev
+}
+
+{
+   IceTransWrite1
+   Memcheck:Param
+   write(buf)
+   obj:/lib/ld-2.3.6.so
+   fun:_IceTransWrite
+   fun:_IceWrite
+}
+
+{
+   IceTransWrite2
+   Memcheck:Param
+   write(buf)
+   obj:/lib/ld-2.4.so
+   fun:_IceTransWrite
+   fun:_IceWrite
+}
+
+{
+   dl_open1
+   Memcheck:Cond
+   obj:/lib/ld-2.3.6.so
+   obj:/lib/tls/i686/cmov/libc-2.3.6.so
+   obj:/lib/ld-2.3.6.so
+   fun:_dl_open
+}
+
+{
+   dl_open2
+   Memcheck:Cond
+   obj:/lib/ld-2.3.6.so
+   obj:/lib/ld-2.3.6.so
+   obj:/lib/tls/i686/cmov/libc-2.3.6.so
+   obj:/lib/ld-2.3.6.so
+   fun:_dl_open
+}
+
+{
+   dl_open3
+   Memcheck:Addr4
+   obj:/lib/ld-2.4.so
+   obj:/lib/tls/i686/cmov/libdl-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/tls/i686/cmov/libdl-2.4.so
+   fun:dlopen
+}
+
+{
+   dl_open4
+   Memcheck:Addr4
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/tls/i686/cmov/libc-2.4.so
+   obj:/lib/ld-2.4.so
+   fun:__libc_dlopen_mode
+}
+
+{
+   dl_open5
+   Memcheck:Addr4
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/tls/i686/cmov/libc-2.4.so
+   obj:/lib/ld-2.4.so
+   fun:__libc_dlopen_mode
+}
+
+{
+   dl_open6
+   Memcheck:Addr4
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/tls/i686/cmov/libc-2.4.so
+   obj:/lib/ld-2.4.so
+   fun:__libc_dlopen_mode
+}
+
+{
+   dlopen7
+   Memcheck:Addr8
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/libdl-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/libdl-2.4.so
+   fun:dlopen
+}
+
+{
+   dlopen8
+   Memcheck:Addr8
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/libdl-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/libdl-2.4.so
+   fun:dlopen
+}
+
+{
+   dlopen9
+   Memcheck:Addr8
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/libdl-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/libdl-2.4.so
+   fun:dlopen
+}
+
+{
+   dlopen10
+   Memcheck:Addr8
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/libdl-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/libdl-2.4.so
+   fun:dlopen
+}
+
+{
+   dlopen11
+   Memcheck:Addr8
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/libdl-2.4.so
+   obj:/lib/ld-2.4.so
+   obj:/lib/libdl-2.4.so
+   fun:dlopen
+}
+
+{
+   XmFontListCopy1
+   Memcheck:Cond
+   fun:XmRenderTableCopy
+   fun:XmFontListCopy
+}
+
+{
+   XmFontListFree1
+   Memcheck:Cond
+   fun:XmRenderTableFree
+   fun:XmFontListFree
+}
+
+{
+   regcomp
+   Memcheck:Cond
+   obj:/lib/tls/i686/cmov/libc-2.3.6.so
+   fun:re_compile_fastmap
+   fun:regcomp
+}
+
+{
+   QPaintDevice1
+   Memcheck:Cond
+   obj:/usr/lib/libQtGui.so.4.2.0
+   fun:_ZN8QPainter5beginEP12QPaintDevice
+}
+
+{
+   setWorldMatrix1
+   Memcheck:Cond
+   obj:/usr/lib/libQtGui.so.4.2.0
+   fun:_ZN8QPainter14setWorldMatrixERK7QMatrixb
+}
+
+{
+   Tcl_CreateHashEntry1
+   Memcheck:Value8
+   fun:Tcl_CreateHashEntry
+}
+
+{
+   Tcl_CreateHashEntry1
+   Memcheck:Cond
+   fun:Tcl_CreateHashEntry
+}

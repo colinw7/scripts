@@ -1,0 +1,33 @@
+name=Set Root
+[manga]
+type=button
+name=Manga
+mnemonic=
+accelerator=
+function=f.setroot
+data=manga.gif bgindex 6
+image=
+[escherknot]
+type=button
+name=Escherknot
+mnemonic=
+accelerator=
+function=f.setroot
+data=escherknot.xbm tile bg cadetblue4 fg black
+image=
+[xface]
+type=button
+name=X Face
+mnemonic=
+accelerator=
+function=f.setroot
+data=Xface.xbm tile bg cadetblue4 fg black
+image=
+[cwm]
+type=button
+name=Cwm
+mnemonic=
+accelerator=
+function=f.setroot
+data=cwm_back.bmp
+image=

@@ -1,0 +1,25 @@
+name=XTerm User Menu
+
+[resize80x25]
+type=button
+name=Resize 80x25
+mnemonic=
+accelerator=
+function=f.resize_to
+data=80x25
+
+[resize80x60]
+type=button
+name=Resize 80x60
+mnemonic=
+accelerator=
+function=f.resize_to
+data=80x60
+
+[resize132x60]
+type=button
+name=Resize 132x60
+mnemonic=
+accelerator=
+function=f.resize_to
+data=132x60

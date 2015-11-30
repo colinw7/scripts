@@ -1,0 +1,23 @@
+foreground=black
+background=gray
+font=helvetica-bold-14
+showClock=yes
+addWindows=yes
+addIcons=no
+position=bottom
+iconWidth=108
+height=28
+
+[clock]
+timeFormat=%H:%M %p
+background=gray
+foreground=black
+font=helvetica-normal-12
+
+[icon]
+foreground=black
+background=gray
+font=helvetica-normal-10
+focusForeground=black
+focusBackground=gray
+focusFont=helvetica-normal-10

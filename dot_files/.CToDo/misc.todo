@@ -1,0 +1,40 @@
+<todo>
+<subject name="Test Area 1">
+<section name="Play Area">
+<item name='' type='text' x='202' y='301' width='369' height='199'>
+Hello World
+</item>
+<item name='' type='image' image='/home/colinw/dev/pics/Catwoman.jpg' x='133' y='23' width='389' height='270'/>
+<item name='' type='image' image='/home/colinw/pics/Monkey002.gif' x='56' y='96' width='36' height='55'/>
+</section>
+</subject>
+<subject name="Test Area 2">
+<section name="Section 1">
+<item name='' type='text' x='315' y='86' width='100' height='100'>
+
+</item>
+</section>
+<section name="Section 2">
+<item name='' type='text' x='10' y='10' width='100' height='100'>
+
+</item>
+</section>
+<section name="Section 3">
+<item name='' type='text' x='15' y='25' width='100' height='100'>
+
+</item>
+</section>
+<section name="Section 4">
+<item name='' type='text' x='9' y='53' width='100' height='100'>
+
+</item>
+</section>
+</subject>
+<subject name="New Subject">
+<section name="New Section">
+<item name='' type='text' x='36' y='65' width='100' height='100'>
+
+</item>
+</section>
+</subject>
+</todo>

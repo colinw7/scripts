@@ -1,0 +1,19 @@
+*keyboardFocusPolicy:           pointer
+*pointerColor:                  red
+*pointerColorBackground:        cyan
+*positionOnScreen:              true
+*interactivePlacement:          false
+*positionIsFrame:               false
+*enableWarp:                    true
+*clientAutoPlace:		true
+*iconDecoration:                activelabel
+*menu*fontList:                 -*-helvetica-bold-r-normal-*-12-*
+*client*fontList:               -*-helvetica-bold-r-normal-*-12-*
+*feedback*fontList:             -*-helvetica-bold-r-normal-*-12-*
+*icon*fontList:                 -*-helvetica-bold-r-normal-*-12-*
+*usePPosition:                  true
+
+*xclock*clientDecoration:       none
+*xclock*clientFunctions:        none
+
+!*xv*clientDecoration: none

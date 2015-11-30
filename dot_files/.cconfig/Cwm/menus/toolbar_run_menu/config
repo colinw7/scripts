@@ -1,0 +1,72 @@
+name=ToolBar Run Menu
+[title]
+type=title
+name=Programs
+
+[xterm]
+type=button
+name=XTerm
+mnemonic=
+accelerator=
+function=f.exec
+data=xterm &
+image=xterm_small.gif
+
+[firefox]
+type=button
+name=Firefox
+mnemonic=
+accelerator=
+function=f.exec
+data=firefox &
+image=firefox.xpm
+
+[thunderbird]
+type=button
+name=Thunderbird
+mnemonic=
+accelerator=
+function=f.exec
+data=thunderbird &
+image=thunderbird.xpm
+
+[xv]
+type=button
+name=XV
+mnemonic=
+accelerator=
+function=f.exec
+data=xv &
+image=xv_small.xpm
+
+[splitter1]
+type=splitter
+
+[restart]
+type=button
+name=Restart
+mnemonic=
+accelerator=
+function=f.exec
+data=/usr/bin/halt -r
+image=
+
+[halt]
+type=button
+name=Halt
+mnemonic=
+accelerator=
+function=f.exec
+data=/usr/bin/halt -p
+image=
+
+[splitter2]
+type=splitter
+
+[quit]
+type=button
+name=Exit
+mnemonic=
+accelerator=
+function=f.quit
+data=

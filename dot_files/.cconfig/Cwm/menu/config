@@ -1,0 +1,7 @@
+foreground=black
+background=gray
+font=helvetica-bolditalic-14
+[title]
+foreground=black
+background=lightsteelblue
+font=helvetica-bolditalic-14

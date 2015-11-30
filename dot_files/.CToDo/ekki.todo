@@ -1,0 +1,179 @@
+<todo>
+<subject name="Qtcl">
+<section name="ToDo">
+<item>
+TODO
+. Remove obsolete widgets
+. Add Qt4 support
+. Phase out Qt3 widgets
+. Fix man page link (errors)
+. Unnamed widgets - report and auto-fix
+. Regression differences on sun/vnc
+. Remove 0x hard coded constants
+. Tcl doxygen documentation
+. qtcl_check doesn't seem to do anything
+. warn on multi-widget match
+. Better name matching |, *, ... patterns. Glob match ? Allow match by widget type e.g. QPushButton ?
+
+Notes
+Warn when Qt3 Qtcl widgets are used:
+
+setenv QTCL_WARN_QT3 1
+
+
+</item>
+</section>
+<section name="Qt3 to Qt4">
+<item>
+Converting Qtcl from Qt3 to Qt4
+
+If you have:
+
+set vbox  [ qtcl_create -name vbox -parent $parent -qclass QVBox]
+
+replace it with:
+
+set vbox  [ qtcl_create -name vbox  -parent $parent -qclass QWidget]
+set vboxl [ qtcl_create -name vboxl -parent $vbox   -qclass QVBoxLayout]
+
+and replace remaining uses of vbox as parent with vboxl:
+
+Old code used to automaticallty create a layout if a QHBox or QVBox was added to a Dialog/Main Window. With Qt4 other widgets can be used as top level widget in Dialog often just a straight QWidget. To enable these widgets to have a layout you can create a layout and add it to the dialog and it will become the Dialog's layout if not exists and then add the QWidget to the layout.
+
+</item>
+</section>
+<section name="Cleanup">
+<item>
+
+</item>
+</section>
+<section name="Documentation">
+<item>
+Documentation
+
+. Commands
+. Man pages per commands
+. Widgets
+. Doxygen for all widgets
+. Utilities
+. Doxygen
+
+</item>
+</section>
+<section name="Coverage">
+<item>
+Coverage
+
+Need to get better coverage
+</item>
+</section>
+<section name="Project Plan">
+<item>
+Qtcl Product Plan
+
+. Qtcl contains a number of Qt3 widgets
+  . Is the long term plan to remove all Qt3 widgets from Ekki (timescale)
+  . Should all Qt3 widgets be removed from Qtcl and if so should we replace them with Qt4 equivalents or just phase them out
+. Most Qt3 widgets have equivalent Qt4 widgets. Like C++ code we can convert Qt3 widgets to Qt4 widgets and warn users of incompatibilites. Better sooner than later. Need to plan ahead.
+. If we plan to support Qtcl it can't be just left to rot. Some support is needed
+. If we plan to scrap Qtcl we need a plan to do that
+  . Port qtcl based dialogs to C++ code
+  . How do we support testing using qtcl - minimal command set - what is it
+  . How do we not break existing users/applications scripts
+</item>
+</section>
+</subject>
+<subject name="Select By Name">
+<section name="Misc">
+<item>
+Add ability to set attributes for result table (generic dialog)
+</item>
+</section>
+</subject>
+<subject name="Misc">
+<section name="New Section">
+<item>
+. Hidden Commands
+  . Remove all methods except gui_hide_cmds
+  . Document (internal only) 
+  . Support hidden man pages for developers (new section cat5 ?, currently man_hidden)
+. Man Pages
+  . Support hidden man pages for developers (new section cat5 ?)
+  . Add man pages for all commands (including hidden) - review if needed/used - auto coverage
+. Misc
+  . Look at QtScript (JavaScript)
+  . gui_get_appoption command (what is it - remove)
+  . More doxygen documentation
+</item>
+</section>
+</subject>
+<subject name="QtclSpy/QtclSnap">
+<section name="New Section">
+<item>
+. Auto rename unnamed widgets or add a button to rename
+. Move settings into a tab on main dialog
+. Event tracing is separate tab/dialog
+. Separate Tabs Information/Events/Options
+</item>
+</section>
+</subject>
+<subject name="Select By Name">
+<section name="New Section">
+<item>
+ToDo
+. Open Data Table in Cell Window or Main Window
+. Add customization for which objects can be used with -of_objects e.g. get_cells -of_objects cannot be used with pin list ? Where is this documented ?  
+. Finish Doxygen documentation (with images)
+. Fix tooltip (add more ?) - STAR
+. Allow application to customize default attributes for results
+. Allow user to add attributes to results or auto add any ones added to filter
+. Allow tooltips per command/option
+. Add support for choosing displayed attributes in search list - needs to be added as a generic feature to low-level EkList/EkHomoList. Display in menu (too many attributes) or as two lists available and current.
+. Support Attrribute Sets ?
+
+Add more options to tcl and C++ command for more testing/functionality (see choose object) e.g. only physical
+</item>
+</section>
+</subject>
+<subject name="EkChooseObject">
+<section name="New Section">
+<item>
+ToDo
+. Remove extra list -demo to Jeff
+. Rationalize usage between Select By Name and Choose Object so that the result is either all or just highlighted not both
+</item>
+</section>
+</subject>
+<subject name="WindowFramework">
+<section name="New Section">
+<item>
+. Problems mixing views normal, minimize, maximize (crashes)
+. Remove any remaining WINFW COMMENTED code
+. Test harnesses for new tcl commands
+</item>
+</section>
+</subject>
+<subject name="Dialogs">
+<section name="New Section">
+<item>
+Tips for writing dialog widgets
+ . Make all public functions slots
+ . Make sure all public slots arguments can be converted in tcl/qtcl - use QT_ENUM
+ . Make all set/get functions properties
+</item>
+</section>
+</subject>
+<subject name="Data Object">
+<section name="New Section">
+<item>
+. EkDataObject is generic database object
+. A collection (selection bus) is a list of data objects
+. EkSelUtil contains useful functions
+  . EkSelUtil::getListOfSelectedSubType
+  . Data Object -> Name
+
+Type Naming Service has string for type
+</item>
+</section>
+</subject>
+</todo>

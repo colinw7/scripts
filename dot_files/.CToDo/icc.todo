@@ -1,0 +1,137 @@
+<todo>
+<subject name="Directories">
+<section name="New Section">
+<item>
+Physical Design (replaces Astro and JupiterXT)
+
+Directories
+. syn/ggui
+. snps/synopsys/auxx/gui
+</item>
+</section>
+</subject>
+<subject name="Selection Model">
+<section name="New Section">
+<item>
+Selection Model
+---------------
+
+JupiterXT
+
+Edit Toolbar Selection/Edit Model
+
+. Left - Select
+. Control/Shift Left - Extend Select
+. Middle - Move
+. Shift Middle - Constrained Move
+. Control Middle - Resize
+. Control Shift Middle - Constrained Resize
+. Right - Cancel or Menu
+
+Auto selection/deselection if nothing selected
+
+Selection based on priority:
+. Inside
+. Nearest
+. Area is used as tie breaker
+
+Selection can be whole object, line or point
+
+ICC Selection/Edit Model
+
+Mode based. Selection and Edit Modes
+
+. Left - Select or Move
+. Control Left - Extend Select
+. Middle (Zoom Stroke Menu)
+. Control Middle (Mode Stroke Menu)
+. Shift Middle (Select Stroke Menu)
+. Right (Menu)
+
+Selection
+. Inside (no tie breaker) - cycles on reselect
+
+Edit Mode is select if not inside selected object or Control is pressed. Shift does constrained move.
+
+</item>
+</section>
+</subject>
+<subject name="Libraries">
+<section name="New Section">
+<item>
+Libraries
+---------
+
+Hdf
+Library contains editing code that is JupiterXT specific so it understands hierarchy e.g. it allows a hard macro inside a soft macro to be moved. It also contains all JupiterXT gui components and associated Scheme/Tcl commands.
+
+Functions include:
+
+. Flow Manager
+  . Create Library
+  . Hierarchy
+  . Edit Core
+. Edit Toolbar
+. Flylines (Hard Macro, Blocks, Pins)
+. Black Boxes (Empty Soft Macros)
+. Flip Chips
+. Some ICC hierarchical editing commands
+
+Hdu
+Library contains editing code that is can be used in JupiterXT/Astro i.e. flat editing so it doesn't really understand hierarchy. The reason this code is seperate from hdf code is that some editing code is used by Astro but Astro does not link some libraries that hierarchical editing needs.
+
+Functions include:
+. Wrapper functions around all editing objects (soft macro, hard macro, std cell, wire, path, pin, ...)
+. Generic object editing code
+. Undo/Redo
+. ICC flat editing commands
+. Flylines 
+. Core Editing
+. Generic code (variable length arrays, variable length strings, linked lists)
+
+</item>
+</section>
+</subject>
+<subject name="Problems">
+<section name="New Section">
+<item>
+Object Type
+
+Object Type system is too coarse for any real object type property system which is used by editing (movable, resizable, ...) and snapping (see below).
+
+Snapping
+
+. Defined as one directional only. Some objects need two directions e.g. std_cell needs row and unit tile or min grid, pin needs wiretrack and edge or min grid
+. Current object type classification is not fine enough. Need different snapping for soft macros, hard macros, standard cells and flip chip drivers even though they are all cells (see above)
+
+</item>
+</section>
+</subject>
+<subject name="Enhancements">
+<section name="New Section">
+<item>
+ICC
+
+Unified Object Type System
+There needs to a single type system across applications:
+. Objects Types
+  . Derived from other types (Soft Macro is derived cell) - customize base type
+    . get_cells -sub_type soft_macro
+    . set_object_snap_type -type cell -sub_type soft_macro
+  . Edit Capabilities (move, resize, snap ...)
+  . Attributes
+                § Name, Type, Range
+. Variables
+  . Must be tied to a command or commands
+  . Command must reference any variables it uses
+. CCI Command Groups
+  . Command can be in multiple groups (gui, editing, floorplanning ...)
+  . Define standard set of groups controlled by application. New group needs to be controlled like new command via the ui committee
+
+Edit
+Select needs to use min area of object when click inside multiple objects
+
+</item>
+</section>
+</subject>
+</todo>

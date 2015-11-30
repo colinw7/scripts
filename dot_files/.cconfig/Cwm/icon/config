@@ -1,0 +1,6 @@
+background=gray
+foreground=white
+font=helvetica-bold-14
+image=xlogo64
+decoration=image label activelabel
+labelWidth=24

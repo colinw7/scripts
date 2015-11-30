@@ -1,0 +1,15 @@
+dbxenv suppress_startup_message 4.0
+alias b='stop'
+alias bi='stop in'
+alias ba='stop at'
+alias c=cont
+alias l=list
+alias n=next
+alias p=print
+alias q=quit
+alias r=run
+alias s=step
+dbxenv scope_look_aside on
+module -a
+ignore USR1
+ignore USR2

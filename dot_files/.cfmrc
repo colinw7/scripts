@@ -1,0 +1,135 @@
+Groups
+  Group ascii
+  Open  "vim -g %s"
+  Image ascii.xpm
+
+  Group binary
+  Open  "Xhexdump -file %s"
+  Image binary.xpm
+
+  Group image
+  Open  "imgview %s"
+  Image picture.xpm
+End
+
+Types
+  Pattern  "*.c"
+  Group    ascii
+  Comment  "C Code File"
+  Image    cfile.xpm
+
+  Pattern  "*.c++"
+  Group    ascii
+  Comment  "C++ Code File"
+  Image    cpp.xpm
+
+  Pattern  "*.cxx"
+  Group    ascii
+  Comment  "C++ Code File"
+  Image    cpp.xpm
+
+  Pattern  "*.cpp"
+  Group    ascii
+  Comment  "C++ Code File"
+  Image    cpp.xpm
+
+  Pattern  "*.h"
+  Group    ascii
+  Comment  "Header File"
+  Image    hfile.xpm
+
+  Pattern  "*.o"
+  Group    binary
+  Comment  "Object File"
+  Image    ofile.xpm
+
+  Pattern  "[Mm]akefile"
+  Group    ascii
+  Comment  "Makefile"
+
+  Pattern  "*.bmp"
+  Group    image
+  Comment  "MS Windows Image File"
+
+  Pattern  "*.gif"
+  Group    image
+  Comment  "GIF Image File"
+
+  Pattern  "*.iff"
+  Group    image
+  Comment  "IFF Image File"
+
+  Pattern  "*.jpg"
+  Group    image
+  Comment  "JPEG Image File"
+
+  Pattern  "*.pcx"
+  Group    image
+  Comment  "PCX Image File"
+
+  Pattern  "*.rgb"
+  Group    image
+  Comment  "SGI Image File"
+
+  Pattern  "*.xbm"
+  Group    image
+  Comment  "X Bitmap File"
+
+  Pattern  "*.xpm"
+  Group    image
+  Comment  "X Pixmap File"
+
+  Pattern  "*.xwd"
+  Group    image
+  Comment  "X Window Dump File"
+
+  Pattern  "core"
+  Group    binary
+  Comment  "Core File"
+  Image    core.xpm
+
+  Pattern  "*.tar"
+  Group    binary
+  Comment  "Tar File"
+  Open     "cmdview 'tar tvf %s'"
+  Image    tar.xpm
+
+  Pattern  "*.tgz"
+  Group    binary
+  Comment  "GZipped Tar File"
+  Open     "cmdview 'tar tvfz %s'"
+  Image    tgz.xpm
+
+  Pattern  "*.gz"
+  Group    binary
+  Comment  "GZipped File"
+
+  Pattern  "lib*.a"
+  Group    binary
+  Comment  "Static Library File"
+
+  Pattern  "*.ps"
+  Group    ascii
+  Comment  "Postscript File"
+  Open     "ghostview %s"
+  Image    psfile.xpm
+
+  Pattern  "*.html"
+  Group    ascii
+  Comment  "HTML File"
+  Open     "netscape %s"
+  Image    netscape.xpm
+
+  Pattern  "*.txt"
+  Group    ascii
+  Comment  "Text File"
+
+  Pattern  "*.scene"
+  Group    ascii
+  Comment  "3D Scene File"
+  Execute  "view3d %s"
+
+  Pattern  "*"
+  Group    binary
+  Comment  "Unknown File"
+End

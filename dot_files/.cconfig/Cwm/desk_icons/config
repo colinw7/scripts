@@ -1,0 +1,31 @@
+[xterm]
+label=X Terminal
+command=xterm &
+icon=xterm2.gif
+x=2
+y=2
+foreground=White
+
+[firefox]
+label=Firefox
+command=/usr/bin/mozillafirefox &
+icon=firefox.xpm
+x=2
+y=2
+foreground=White
+
+[thunderbird]
+label=Thunderbird
+command=/usr/bin/mozilla-thunderbird &
+icon=thunderbird.xpm
+x=2
+y=2
+foreground=White
+
+[home_dir]
+label=Home
+command=cfm_open_dir &
+icon=disk_folder.xpm
+x=2
+y=2
+foreground=White

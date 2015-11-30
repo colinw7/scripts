@@ -1,0 +1,666 @@
+<todo>
+<subject name="Bookmarks">
+<section name="CBookmarks">
+<item name='' type='text' x='24' y='44' width='417' height='186'>
+. process multiple files (and merge)
+. locate duplicates
+. Create Group and Add Name/Addr to Group (if not exist)
+. Optional soft per group and groups (Groups first)
+. Create extra group to catch all extras
+. gui interface 
+</item>
+</section>
+<section name="CTagMarks">
+<item name='' type='text' x='18' y='20' width='491' height='252'>
+Integrate into Web.
+
+Generate href for each tag to run CGI script to generate next page.
+How add and store Multiple tags
+
+Need easy way to:
+  add multiple tags to bookmark
+  add new bookmarks
+  generate bookmarks web page 
+</item>
+</section>
+</subject>
+<subject name="Email">
+<section name="EMail">
+<item name='' type='text' x='12' y='26' width='257' height='127'>
+Finish initial impl 
+</item>
+</section>
+</subject>
+<subject name="Font">
+<section name="CXFont">
+<item name='' type='text' x='15' y='34' width='341' height='118'>
+getStringImage always uses same image id ? 
+</item>
+</section>
+<section name="CFont">
+<item name='' type='text' x='25' y='23' width='266' height='146'>
+Makes sure supports all usages
+Debug, installed/used fonts 
+</item>
+</section>
+<section name="CFreeType">
+<item name='' type='text' x='18' y='31' width='100' height='100'>
+
+</item>
+</section>
+<section name="CImageFont">
+<item name='' type='text' x='14' y='21' width='100' height='100'>
+
+</item>
+</section>
+<section name="CLFont">
+<item name='' type='text' x='10' y='22' width='100' height='100'>
+
+</item>
+</section>
+<section name="CVFont">
+<item name='' type='text' x='16' y='26' width='100' height='100'>
+
+</item>
+</section>
+<section name="New Section">
+<item name='' type='text' x='16' y='27' width='100' height='100'>
+
+</item>
+</section>
+<section name="CFontMetrics">
+<item name='' type='text' x='15' y='31' width='100' height='100'>
+
+</item>
+</section>
+</subject>
+<subject name="Encrypt">
+<section name="Encrypt">
+<item name='' type='text' x='16' y='27' width='201' height='102'>
+Secret key 
+</item>
+</section>
+</subject>
+<subject name="Fractals">
+<section name="Bifurication">
+<item name='' type='text' x='16' y='30' width='277' height='182'>
+
+</item>
+</section>
+<section name="Mandelbrot">
+<item name='' type='text' x='25' y='44' width='202' height='161'>
+
+</item>
+</section>
+<section name="BioMorph">
+<item name='' type='text' x='14' y='24' width='226' height='175'>
+More parameters 
+</item>
+</section>
+<section name="Lorenz">
+<item name='' type='text' x='10' y='24' width='111' height='100'>
+
+</item>
+</section>
+<section name="IFS">
+<item name='' type='text' x='15' y='36' width='217' height='93'>
+Qt version 
+</item>
+</section>
+</subject>
+<subject name="File">
+<section name="CDirCheck">
+<item name='' type='text' x='19' y='27' width='100' height='100'>
+
+</item>
+</section>
+<section name="CDirDiff">
+<item name='' type='text' x='15' y='21' width='100' height='100'>
+
+</item>
+</section>
+<section name="CDirFmt">
+<item name='' type='text' x='10' y='10' width='100' height='100'>
+
+</item>
+</section>
+<section name="CDirTree">
+<item name='' type='text' x='10' y='10' width='100' height='100'>
+
+</item>
+</section>
+<section name="CFileApp">
+<item name='' type='text' x='11' y='32' width='100' height='100'>
+
+</item>
+</section>
+<section name="CFileCheckSum">
+<item name='' type='text' x='10' y='10' width='100' height='100'>
+
+</item>
+</section>
+<section name="CFileStat">
+<item name='' type='text' x='10' y='10' width='100' height='100'>
+
+</item>
+</section>
+<section name="CFileUtil">
+<item name='' type='text' x='10' y='10' width='100' height='100'>
+
+</item>
+</section>
+<section name="CReadFile">
+<item name='' type='text' x='10' y='10' width='100' height='100'>
+
+</item>
+</section>
+<section name="CStream">
+<item name='' type='text' x='9' y='31' width='100' height='100'>
+
+</item>
+</section>
+</subject>
+<subject name="FileMgr">
+<section name="CFileIcon">
+<item name='' type='text' x='16' y='33' width='100' height='100'>
+
+</item>
+</section>
+<section name="CFileMgr">
+<item name='' type='text' x='10' y='10' width='100' height='100'>
+
+</item>
+</section>
+<section name="CFilestrip">
+<item name='' type='text' x='10' y='10' width='100' height='100'>
+
+</item>
+</section>
+</subject>
+<subject name="GUI">
+<section name="CXWidget">
+<item name='' type='text' x='10' y='26' width='264' height='213'>
+Lots more work 
+</item>
+</section>
+<section name="CWidget">
+<item name='' type='text' x='11' y='17' width='260' height='239'>
+More widgets
+
+Slider widget with support for scrollbar, integer ranges, ... 
+</item>
+</section>
+<section name="CGUI">
+<item name='' type='text' x='19' y='25' width='375' height='245'>
+GUI wrapper for X/Win32
+
+TODO: Move code to newer libraries and delete 
+</item>
+</section>
+<section name="CColorWheel">
+<item name='' type='text' x='12' y='34' width='295' height='263'>
+Can't accurately set RGB as HSV feedback breaks it
+Add current type and ensure that value is accurate
+Add Auto Base to pick minimum (maximum ?) component 
+</item>
+</section>
+</subject>
+<subject name="Image">
+<section name="CImageLib">
+<item name='' type='text' x='11' y='15' width='583' height='310'>
+. CImageTGA does not deal with compressed images. Needs extra checking
+ . More formats
+ . Handle image plugins/shared libs
+ . Restore GIF to derived class or store Anim in Image Structure
+ . memory leak for colors
+ . xwd don't seem to be written correctly
+ . support aspect ratio on resize
+ . test cases for convert
+ . process functions (gray scale, ...)
+ . transparency using alpha channnel
+ . produce Font Images to extra strings 
+</item>
+</section>
+</subject>
+<subject name="Lang">
+<section name="CCeilP">
+<item name='' type='text' x='12' y='27' width='388' height='187'>
+support class like syntax with structures.
+Allow functions as elements in structures (calling syntax ?)
+Finish new scope class and use to replace variable list 
+</item>
+</section>
+<section name="CCeilL">
+<item name='' type='text' x='11' y='24' width='243' height='180'>
+Use D language as template for more features 
+</item>
+</section>
+</subject>
+<subject name="Match">
+<section name="CGlob">
+<item name='' type='text' x='14' y='26' width='451' height='92'>
+. Add (..) Save Pattern (see hz72)
+. Make Compiled String a Class so can have a << operator ... 
+</item>
+</section>
+</subject>
+<subject name="Math">
+<section name="BigInt">
+<item name='' type='text' x='12' y='25' width='351' height='136'>
+Speed up
+Allow switch between int and string formats when required
+More functions 
+</item>
+</section>
+<section name="Vector">
+<item name='' type='text' x='6' y='20' width='461' height='259'>
+Floats vs Double
+Templated ?
+Public or Private data
+Abstract sqrt to allow switch between normal and fast approx
+c2 = a2 + b2 - 2abcosY (add to math lib)
+Gram Schmidt Orthogonalization
+
+Homogenous Point can double as a vector:
+  Point = (x,y,z,1)   P + P = ...,2 (illegal), P+V = P, V+P = P, V + V = V
+  Vector = (x,y,z,0)
+
+toPolar/fromPolar (2D)
+
+toSpherical/fromSpherical (3D) (Pg51 Math for Games) 
+</item>
+</section>
+</subject>
+<subject name="Misc">
+<section name="CToDo">
+<item name='' type='text' x='15' y='23' width='438' height='191'>
+Better encoding of text into XML
+Need mutliple items per section
+Allow cross reference/links - option may appear in multiple places 
+</item>
+</section>
+<section name="CArgs">
+<item name='' type='text' x='10' y='23' width='357' height='157'>
+Aliases
+Better Syntax
+Usage
+Access for Individual Args
+Return error codes not bools, throws
+Support multiple option instances 
+</item>
+</section>
+</subject>
+<subject name="Qt">
+<section name="CQApp">
+<item name='' type='text' x='12' y='29' width='289' height='163'>
+Better support for CQObjEdit via keyboard accelerator
+Better(customizable) accelerator 
+</item>
+</section>
+<section name="CQColorChooser">
+<item name='' type='text' x='19' y='28' width='227' height='167'>
+Allow switch between styles 
+</item>
+</section>
+<section name="CQEdit">
+<item name='' type='text' x='11' y='31' width='569' height='201'>
+Not redrawing propertly after font/color change
+Initial font/color values
+Better mouse selection (needs drag update and real press/release pos, double click word select)
+Undo
+Key mapping to function to allow modes and user macros
+How handle extra character at end of line on/off for insert ?
+Single char select ?
+Popup menu (functions ?)
+Undo cursor positioning
+Focus control ?
+Text mode, text should replace selection 
+</item>
+</section>
+<section name="CQExplorer">
+<item name='' type='text' x='12' y='22' width='261' height='225'>
+Auto raise tab on load
+Smaller labels (CQTabWidget ?) 
+</item>
+</section>
+<section name="CQFileMgr">
+<item name='' type='text' x='6' y='26' width='429' height='240'>
+Loading images needs to be faster and cleaner (no failed to open messages)
+Details View need to be able to get out (new CQTableWidget ?)
+Rubberband is invsible
+Better font, default to small icons 
+</item>
+</section>
+<section name="CQFontChooser">
+<item name='' type='text' x='12' y='20' width='298' height='128'>
+Support Family/Style/Font input fields 
+</item>
+</section>
+<section name="CQObjEdit">
+<item name='' type='text' x='22' y='18' width='373' height='169'>
+Reload Button
+Cursor Shape<->Name
+SizeType<->Name
+Region<->List of Rects
+Brush<->Name
+Pen<->Name
+
+use Enum class to convert enum<->string 
+</item>
+</section>
+<section name="CQPaint">
+<item name='' type='text' x='9' y='21' width='338' height='227'>
+Need to refactor so can be used as widget
+Don't rely on MDI for palettes ? Try CQWinWidget 
+</item>
+</section>
+<section name="CQPixmap">
+<item name='' type='text' x='38' y='34' width='432' height='297'>
+Undo/Redo
+Copy/Move
+Invert Marked Area not Whole Image
+Colormap and Full Color Modes
+Curve needed ?
+Text
+Add Other Image Functions ?
+Replace color (double click on swatch)
+Better fg/bg color selection/set 
+</item>
+</section>
+<section name="CQTagMarks">
+<item name='' type='text' x='23' y='25' width='212' height='107'>
+Integrate into Web ? 
+</item>
+</section>
+<section name="CQTerm">
+<item name='' type='text' x='13' y='25' width='306' height='242'>
+not resizing correctly
+scrolling broken
+better colors 
+</item>
+</section>
+<section name="CQToDo">
+<item name='' type='text' x='18' y='33' width='258' height='138'>
+Use CQEdit
+Delete Tabs ? 
+</item>
+</section>
+<section name="CQWinWidget">
+<item name='' type='text' x='18' y='47' width='228' height='167'>
+Click to move model 
+</item>
+</section>
+<section name="Ideas">
+<item name='' type='text' x='19' y='28' width='353' height='120'>
+Widget to allow windowing (move/resize) of widget 
+</item>
+<item name='' type='text' x='30' y='200' width='265' height='202'>
+Command Widget, History Up/Down 
+</item>
+</section>
+</subject>
+<subject name="Data Structures">
+<section name="Hash">
+<item name='' type='text' x='21' y='28' width='373' height='258'>
+Finish Linear Hash
+Speed Tests
+Remove use of slow hashes
+Compare to std map 
+</item>
+</section>
+</subject>
+<subject name="TextPro">
+<section name="CVEdit">
+<item name='' type='text' x='16' y='21' width='236' height='180'>
+
+</item>
+</section>
+<section name="CEdit">
+<item name='' type='text' x='19' y='26' width='227' height='175'>
+Add VIM command support (ex syntax) 
+</item>
+</section>
+<section name="CQEdit">
+<item name='' type='text' x='8' y='26' width='408' height='201'>
+Move more code from CQEditTest -> CQEdit
+Move more code from CQEdit into CVEdit
+Move VI code into separate library so can be used by non-Qt App
+Tracked changed for save confirm
+Preferences Dialog (color, font, ...)
+Fixed width swich
+Scrollbar step to line height 
+</item>
+</section>
+<section name="CXEdit">
+<item name='' type='text' x='14' y='31' width='342' height='269'>
+Factor out CXScroll and CXStatus into separate class
+Scroll follows cursor
+More UI ?
+Add status bar for messages
+where does 1,$p go - stacked widget/replace 
+</item>
+</section>
+</subject>
+<subject name="Term">
+<section name="CTerm">
+<item name='' type='text' x='13' y='33' width='271' height='195'>
+Tabs don't work correctly 
+</item>
+</section>
+<section name="CXTerm">
+<item name='' type='text' x='12' y='36' width='255' height='198'>
+Factor out CXTermScroll
+Resize should shorten lines 
+</item>
+</section>
+</subject>
+<subject name="Utilities">
+<section name="DirFmt">
+<item name='' type='text' x='14' y='30' width='249' height='100'>
+
+</item>
+</section>
+<section name="Cls">
+<item name='' type='text' x='9' y='32' width='211' height='161'>
+Finish Tree mode
+
+more find types 
+</item>
+</section>
+</subject>
+<subject name="RayTrace">
+<section name="CRayTrace">
+<item name='' type='text' x='14' y='23' width='526' height='412'>
+Use normal from Hit Data (Differential Geometry)
+Use vector transform for line
+Refraction (halo artifacts), try plane
+Perspective, Camera model, Orthogonal broke, other models, consolidate code with CGeometry
+Fix Model view (polygon orientation ?)
+GUI Interface (quick view, CGeomtetry hybrid)
+More object types (add partial code)
+Fix transform from normal (?)
+Add composite objects
+spin camera
+animation control
+light position x value reverse ?
+eye light to replace ambient ? 
+</item>
+</section>
+</subject>
+<subject name="GL">
+<section name="CGL">
+<item name='' type='text' x='19' y='31' width='345' height='219'>
+Write some real apps and try use both CGL and real GL
+
+Fix redraw problems 
+</item>
+</section>
+<section name="CGLApp">
+<item name='' type='text' x='7' y='27' width='246' height='182'>
+
+</item>
+</section>
+<section name="CGLDefender">
+<item name='' type='text' x='24' y='30' width='232' height='199'>
+Add bullets
+
+Add circular background 
+</item>
+</section>
+<section name="CGLFilmstrip">
+<item name='' type='text' x='17' y='28' width='100' height='100'>
+
+</item>
+</section>
+<section name="CGLImageBrowser">
+<item name='' type='text' x='13' y='22' width='100' height='100'>
+
+</item>
+</section>
+<section name="CGLJigsaw">
+<item name='' type='text' x='9' y='24' width='100' height='100'>
+
+</item>
+</section>
+<section name="CGLModel">
+<item name='' type='text' x='13' y='23' width='100' height='100'>
+
+</item>
+</section>
+<section name="CGLPixelRenderer">
+<item name='' type='text' x='18' y='31' width='264' height='176'>
+Test all functions 
+</item>
+</section>
+</subject>
+<subject name="XLib">
+<section name="CXLib">
+<item name='' type='text' x='10' y='33' width='199' height='129'>
+
+</item>
+</section>
+</subject>
+<subject name="C++">
+<section name="Enum">
+<item name='' type='text' x='12' y='25' width='385' height='297'>
+enum eFieldWidth {
+  DUMMY
+};
+
+void operator<<(eFieldWidth w) {
+  fieldWidth = w;
+}
+
+str << eFieldWidth(10) << eLeft << value; // left aligned in with of 10 using enums
+
+----------
+
+Write a program to generate enum with value<->enum conversion 
+</item>
+</section>
+</subject>
+<subject name="String">
+<section name="CStrUtil">
+<item name='' type='text' x='14' y='44' width='279' height='116'>
+Move Roman Numbers to separate class 
+</item>
+</section>
+</subject>
+<subject name="Emulation">
+<section name="Nascom">
+<item name='' type='text' x='19' y='29' width='309' height='199'>
+More testing
+Sound 
+</item>
+</section>
+<section name="Spectrum">
+<item name='' type='text' x='12' y='31' width='316' height='189'>
+Tape load
+Sound 
+</item>
+</section>
+<section name="Z80">
+<item name='' type='text' x='22' y='24' width='277' height='191'>
+Regression
+Speed up 
+</item>
+</section>
+<section name="VML">
+<item name='' type='text' x='14' y='26' width='266' height='172'>
+Finish test cases (hanoi) 
+</item>
+</section>
+</subject>
+<subject name="Games">
+<section name="Asteroids">
+<item name='' type='text' x='12' y='27' width='280' height='149'>
+High Score Table
+Small/Large Space ship
+Difficulty 
+</item>
+</section>
+<section name="Cards">
+<item name='' type='text' x='13' y='35' width='245' height='153'>
+. Hand Class 
+</item>
+</section>
+<section name="Dot2Dot">
+<item name='' type='text' x='12' y='28' width='315' height='182'>
+More puzzles
+Random select
+Delay before end
+Sound 
+</item>
+</section>
+<section name="Hanoi">
+<item name='' type='text' x='10' y='29' width='240' height='112'>
+Qt Version 
+</item>
+</section>
+<section name="Othello">
+<item name='' type='text' x='13' y='32' width='194' height='142'>
+Qt Version 
+</item>
+</section>
+<section name="Puzzle">
+<item name='' type='text' x='11' y='28' width='236' height='172'>
+Better piece template generation
+Better use of space for pieces 
+</item>
+</section>
+<section name="Seahaven">
+<item name='' type='text' x='7' y='23' width='473' height='208'>
+. Better solve algorithm
+. Build up stack in reverse order so always know how to solve and always solvable.
+. ensure window does not move outside graphics area
+. display move should be S1.2 -> W4
+. ensure no more moves before auto tidying
+. If unsolvable then should be a win
+. delay on solve between moves
+. Dummy first move for history
+. Lock consecutive cards together for move
+. Auto move from work to stack if consecutive ?
+. Animate tidy moves 
+</item>
+</section>
+<section name="Sudoku">
+<item name='' type='text' x='10' y='27' width='299' height='247'>
+Add extra solve techniques:
+. Pairs/Triples
+. Lone Rangers (how highlight) 
+</item>
+</section>
+</subject>
+<subject name="Web">
+<section name="CUrl">
+<item name='' type='text' x='14' y='27' width='100' height='100'>
+
+</item>
+</section>
+<section name="Email">
+<item name='' type='text' x='44' y='65' width='202' height='114'>
+Finish test implementation 
+</item>
+</section>
+</subject>
+</todo>

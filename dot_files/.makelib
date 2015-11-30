@@ -1,0 +1,120 @@
+CArgs: CStrUtil
+CAsteroidsLib: CLFont COS CConfig CConfig CPixelRenderer CUtil CMath CStrUtil
+CBifuricationLib:
+CBoatAndWater: CWaterSurface CRigidBody CCanvas3DApp
+CBrowserLib: CImageLib
+CCanvas3DApp: CUI CCanvas3DCUI CCanvas3D CMath CImageLib
+CCanvas3DCGUI: CCanvas3D CGUI CImageLib
+CCanvas3D: CImageLib CMath CStrUtil
+CCanvas3DCUI: CCanvas3D CUI CImageLib
+CCard: CImageLib
+CCommand: CHistory
+CConfig: CFile CStrUtil CUtil
+CDragon:
+ceil: readline list file stack strgen vstr varray glob math
+CEnv: CStrUtil CGlob
+CFile: CEnv CStrUtil
+CFileUtil: CFile
+CFlag: CTclApp CTclCanvas3D COS
+CFlocking: CCanvas3DApp CProfile
+CGL: CCanvas3D CGUI CImageLib
+CGlob:
+CGradient: CImageLib
+CGUIAsteroids: CGUIAsteroidsLib CGUIPixelRenderer
+CGUIAsteroidsLib: CAsteroidsLib
+CGUIBifurication: CBifuricationLib CGUIPixelRenderer CGUI
+CGUI: CXLib CImageLib
+CGUIDragon: CGUIMain CGUIPointFractal CGUIPixelRenderer CGUI CDragon
+CGUIJulia: CGUIMain CGUIPointFractal CGUIPixelRenderer CGUI CJulia 
+CGUILorenz: CGUIMain CGUIPointFractal CGUIRenderer2D CGUI CLorenz
+CGUIMain: CGUI
+CGUIMandelbrot: CGUIMain CGUIPointFractal CGUIPixelRenderer CGUI CMandelbrot
+CGUIPhoenix: CGUIMain CGUIPointFractal CGUIPixelRenderer CGUI CPhoenix
+CGUIPixelRenderer: CGUI CPixelRenderer CImageLib
+CGUIPointFractal: CGUI CGUIPixelRenderer CPointFractal
+CHistory: CStrUtil CFile CUtil COS
+CIfs: CUtil CTurtle CStrUtil CRenderer2D ceil CUtil
+CImageFont: CImageLib
+CImageLib: CUrl CFileUtil CFile png jpeg
+CImagePixelRenderer: CPixelRenderer CImageLib
+CImageRenderer2D: CRenderer2D CImageLib
+CImageUtil: CImageLib
+CJulia:
+Cls: ClsLib
+ClsLib: COSUser CEnv COSTerm CDir CTime CGlob CStrUtil CFileUtil CStrFmt COSFile COSTerm COSProcess
+CLFont:
+CLorenz: CMath
+CMandelbrot: CMath
+CMandelbrotRenderer: CMandelbrot CXLibPixelRenderer CImagePixelRenderer CXLib CPointFractal
+CMath: COS
+CMos: CImageLib CStrUtil COS CXrtFont
+COS: CGlob CStrNCase
+CPath2D: CMath CStrUtil CImageLib
+CPhoenix:
+CPixelClip: CMath CUtil
+CPixelRenderer: CPixelClip CImageLib CMath
+CPointFractal: CPixelRenderer CMath CUtil
+CProfile: COS
+CPSView: CRenderer2D CPath2D CPixelClip CGlob CStrUtil CMath CArgs CUtil CEnv COS CReadLine
+CReadLine: CHistory readline
+CRegExp: CStrNCase regexp
+CRenderer2D: CPixelRenderer CPath2D CPixelClip CImageLib CMath
+CRenderer3D: CStrUtil CFile CUtil CMath CImageLib
+CRGBCanvas: CImageLib
+CStrNCase:
+CStrUtil: COS CGlob CRegExp CStrNCase
+CSVG: CXML CImageLib CFile CStrUtil CMath CFileUtil CUtil CConfig
+CTclApp: CXLib CStrUtil CReadLine tix CFile
+CTclCanvas2D: CTclApp CXLib CMath CUtil CImageLib CFileUtil
+CTclCanvas3D: CTclCanvas CCanvas3D CTclApp CXLib CImageLib Xt
+CTclCanvas: CTclApp CXLib CImageLib
+CTclCanvasPixelRenderer: CTclCanvas CPixelRenderer CImageLib
+CTclCanvasRenderer2D: CTclCanvas CRenderer2D CTclCanvasPixelRenderer
+CTclFileMgr: CTclCanvas CStrUtil CFile CTclApp CImageLib CFileUtil
+CTclIfs: CTclApp CIfs CTclCanvasRenderer2D CTclCanvas CRenderer2D
+CTclPixmap: CTclApp CTclCanvas CImageLib CPixelRenderer CUtil CUndo CMath
+CTclRenderer3D: CTclApp CTclCanvas CRenderer3D CMath CXLibRenderer3D
+CTclVFont: CTclCanvas2D CVFont
+CTerm: CImageLib
+CTimer: COS
+CTurtle:
+CUI: COS CEnv CStrUtil CMos Xm CImageLib
+CUndo:
+curses:
+CUrl: CFile
+CUtil: CFile CStrUtil CImageLib COS 
+CVFont:
+CVFontTest: CUI CVFont
+CXLib: CConfig
+CXLibGame: CXLib CXLibPixelRenderer
+CXLibPixelRenderer: CPixelRenderer CXLib CMath CImageLib
+CXLibRenderer3D: CXLib CMath CImageLib
+CXLibSnapshot: CXLib CImageLib
+CXML: CFile CStrUtil CUtil 
+CXrtFont: CImageLib
+CXrtFontTest: xmain CXLib CXrtFont Xm
+CXSudoku: CXWidget CXLib
+CXTermLib: CFile CStrUtil CUtil 
+CXWidget: CImageLib
+file: stack
+glob: vstr file
+jpeg:
+list:
+math:
+png:
+pthread:
+readline: curses
+regexp:
+stack:
+strgen: vstr
+tcl: Xt pthread
+tix: tk tcl
+tk: tcl
+varray:
+vstr:
+X11: Xext
+Xcw: ceil Xm strgen varray vstr list file glob
+Xext:
+xmain: Xcw
+Xm: Xt
+Xt: X11

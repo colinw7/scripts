@@ -1,0 +1,5 @@
+[user_menu]
+area=Menu
+event=<Button2>
+function=f.menu
+data=XTerm User Menu

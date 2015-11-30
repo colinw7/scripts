@@ -1,0 +1,4 @@
+inject_ticks=20
+inject_y_velocity_min=75
+inject_y_velocity_max=150
+explode_ticks=100

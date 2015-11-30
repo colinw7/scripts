@@ -1,0 +1,49 @@
+name=Root Programs
+[title]
+type=title
+name=Programs
+
+[filefox]
+type=button
+name=Firefox
+mnemonic=
+accelerator=
+function=f.exec
+data=filefox &
+image=firefox.xpm
+
+[thunderbird]
+type=button
+name=Thunderbird
+mnemonic=
+accelerator=
+function=f.exec
+data=thunderbird &
+image=thunderbird.xpm
+
+[xclock]
+type=button
+name=XClock
+mnemonic=
+accelerator=
+function=f.exec
+data=xclock &
+image=clock_small.xpm
+
+[xterm]
+type=button
+name=XTerm
+mnemonic=
+accelerator=
+function=f.exec
+data=xterm &
+image=xterm_small.gif
+
+[xv]
+type=button
+name=XV
+mnemonic=
+accelerator=
+function=f.exec
+data=xv &
+image=xv_small.xpm

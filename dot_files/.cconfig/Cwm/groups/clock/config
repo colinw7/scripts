@@ -1,0 +1,5 @@
+pattern=*clock*
+icon=clock1.gif
+decorations=none
+circluateSkip=true
+toolbarSkip=true

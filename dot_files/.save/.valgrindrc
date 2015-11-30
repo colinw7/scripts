@@ -1,0 +1,5 @@
+-v
+memcheck:--gen-suppressions=all
+--demangle=yes
+memcheck:--suppressions=/home/colinw/.valgrind.suppressions
+--db-attach=yes

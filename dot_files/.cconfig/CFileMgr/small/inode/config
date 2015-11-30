@@ -1,0 +1,5 @@
+dir=/home/colinw/mime/images/32x32/inode/dir.png
+fifo=/home/colinw/mime/images/32x32/inode/fifo.png
+cdev=/home/colinw/mime/images/32x32/inode/cdev.png
+bdev=/home/colinw/mime/images/32x32/inode/bdev.png
+socket=/home/colinw/mime/images/32x32/inode/socket.png

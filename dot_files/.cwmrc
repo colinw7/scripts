@@ -1,0 +1,165 @@
+Menu 'Root Programs'
+  Title    'Programs'
+  Splitter '--------'
+  Button   'XTerm'    '' '' f.exec 'xterm &'
+  Button   'XClock'   '' '' f.exec 'xclock &'
+  Button   'Netscape' '' '' f.exec 'netscape &'
+  Button   'XV'       '' '' f.exec 'xv &'
+End
+
+Menu 'Root Window Ops'
+  Title    'Window Ops'
+  Splitter '----------'
+  Button   'Move'         'M' '' f.move
+  Button   'Resize'       's' '' f.resize
+  Button   'Iconise'      'I' '' f.iconise
+  Button   'Maximise'     'x' '' f.maximize
+  Button   'Minimise'     'n' '' f.minimize
+  Button   'Restore'      'R' '' f.restore
+  Button   'Raise'        'a' '' f.raise
+  Button   'Lower'        'L' '' f.lower
+  Button   'Shuffle Up'   'U' '' f.circle_up
+  Button   'Shuffle Down' 'D' '' f.circle_down
+  Button   'Close'        'C' '' f.close
+End
+
+Menu 'Root Functions'
+  Title    'Functions'
+  Splitter '---------'
+  Button   'Lockscreen' '' '' f.exec 'xlock -mode random'
+  Splitter '----------'
+  Cascade  'Set Root'
+    Button 'Manga'      '' '' f.setroot 'manga.gif bgindex 6'
+    Button 'Escherknot' '' '' f.setroot 'escherknot.xbm tile bg cadetblue4 fg black'
+    Button 'X Face'     '' '' f.setroot 'Xface.xbm tile bg cadetblue4 fg black'
+    Button 'X Face'     '' '' f.setroot 'cwm_back.bmp'
+  End
+  Splitter '----------'
+  Button   'Toolbar'    '' '' f.toolbar
+  Splitter '----------'
+  Button   'Refresh'    '' '' f.refresh
+  Button   'Restart'    '' '' f.restart
+  Button   'Quit'       '' '' f.quit
+End
+
+Menu 'XTerm User Menu'
+  Button 'Resize 80x60' '' '' f.resize_to '80x60'
+  Button 'Resize 80x25' '' '' f.resize_to '80x25'
+End
+
+Menu 'ToolBar Run Menu'
+  Title    'Programs'
+  Splitter '--------'
+  Button   'XTerm'    '' '' f.exec 'xterm &'
+  Button   'XClock'   '' '' f.exec 'xclock &'
+  Button   'Netscape' '' '' f.exec 'netscape &'
+  Button   'XV'       '' '' f.exec 'xv &'
+End
+
+Root
+# Image 'Xface.xbm tile bg cadetblue4 fg black'
+
+  Event <Button1>            f.menu 'Root Programs'
+  Event <Button2>            f.menu 'Root Window Ops'
+  Event <Button3>            f.menu 'Root Functions'
+  Event Alt<Key>Escape       f.circle_down
+  Event Alt+Shift<Key>Escape f.circle_up
+  Event Alt<Key>Tab          f.focus_next
+  Event Alt+Shift<Key>Tab    f.focus_prev
+  Event Alt<Key>t            f.exec 'xterm &'
+  Event Alt<Key>F1           f.change_desk '1'
+  Event Alt<Key>F2           f.change_desk '2'
+  Event Alt<Key>F3           f.change_desk '3'
+  Event Alt<Key>F4           f.change_desk '4'
+  Event Alt<Key>F5           f.change_desk '5'
+  Event Alt<Key>F6           f.change_desk '6'
+  Event Alt<Key>F7           f.change_desk '7'
+  Event Alt<Key>F8           f.change_desk '8'
+End
+
+Desk 1 'Desk 1'
+#  Image 'Xface.xbm tile bg cadetblue4 fg black'
+End
+
+Desk 2 'Desk 2'
+End
+
+Desk 3 'Desk 3'
+End
+
+Desk 4 'Desk 4'
+End
+
+Window *
+  Event Any Alt<Key>Escape       f.circle_down
+  Event Any Alt+Shift<Key>Escape f.circle_up
+  Event Any Alt<Key>Tab          f.focus_next
+  Event Any Alt+Shift<Key>Tab    f.focus_prev
+  Event Any Shift<Key>Escape     f.window_menu
+  Event Any Alt<Key>space        f.window_menu
+  Event Any Alt<Key>p            f.paste 'Hello'
+End
+
+Window *clock*
+  Icon          clock1.gif
+  Decorations   none
+  CirculateSkip true
+  ToolbarSkip   true
+End
+
+Window xterm
+  Icon            xterm3.gif
+  IconSmall       xterm_small.gif
+# FocusAutoRaise  true
+
+  Event Menu <Button2> f.menu 'XTerm User Menu'
+End
+
+Window DOMEcaltqa
+  IconSmall caltqa.gif
+End
+
+Window cfm
+  IconSmall folder_small.gif
+End
+
+Window Netscape
+  Icon      netscape.gif
+  IconSmall netscape_small.gif
+End
+
+CommandIcon
+  Label      'X Terminal'
+  Command    'xterm &'
+  Icon       xterm2.gif
+  IconSmall  xterm_small.gif
+  Position   2 2
+  Foreground White
+End
+
+CommandIcon
+  Label      'Netscape'
+  Command    'netscape &'
+  Icon       netscape.gif
+  IconSmall  netscape_small.xpm
+  Position   2 2
+  Foreground White
+End
+
+CommandIcon
+  Label      'Home'
+  Command    'cfm_open_dir &'
+  Icon       disk_folder.xpm
+  Position   2 2
+  Foreground White
+End
+
+Toolbar
+  Displayed  Yes
+  Clock      Yes
+  AddWindows Yes
+  AddIcons   No
+  Position   Bottom
+  IconWidth  108
+  Height     28
+End

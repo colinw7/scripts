@@ -1,0 +1,11 @@
+#!/bin/csh -f
+
+foreach dir (*)
+  if (-d $dir) then
+    echo "[$dir]" >> config
+
+    cat $dir/config >> config
+  endif
+end
+
+exit 0

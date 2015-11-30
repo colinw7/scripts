@@ -1,0 +1,14 @@
+bmp=/home/colinw/mime/images/32x32/image/bmp.png
+gif=/home/colinw/mime/images/32x32/image/gif.png
+ico=/home/colinw/mime/images/32x32/image/ico.png
+iff=/home/colinw/mime/images/32x32/image/iff.png
+jpg=/home/colinw/mime/images/32x32/image/jpg.png
+pcx=/home/colinw/mime/images/32x32/image/pcx.png
+png=/home/colinw/mime/images/32x32/image/png.png
+ppm=/home/colinw/mime/images/32x32/image/ppm.png
+psp=/home/colinw/mime/images/32x32/image/psp.png
+rgb=/home/colinw/mime/images/32x32/image/rgb.png
+tif=/home/colinw/mime/images/32x32/image/tif.png
+xbm=/home/colinw/mime/images/32x32/image/xbm.png
+xpm=/home/colinw/mime/images/32x32/image/xpm.png
+xwd=/home/colinw/mime/images/32x32/image/xwd.png

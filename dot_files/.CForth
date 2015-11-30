@@ -1,0 +1,10 @@
+: CR 13 EMIT 10 EMIT ;
+: SPACE 32 EMIT ;
+: SPACES 0 DO SPACE LOOP ;
+
+: 0< 0 < ;
+: 0= 0 = ;
+: 0> 0 > ;
+
+: 1- 1 - ;
+: 2- 2 - ;
