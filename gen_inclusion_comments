@@ -1,0 +1,11 @@
+#/bin/csh -f
+
+set file = $1
+
+set r = $file:r
+
+echo "#ifndef ${r}_H"
+echo "#define ${r}_H"
+echo "#endif"
+
+exit 0
