@@ -10,6 +10,8 @@ setenv PROGS_DIR $DEV_DIR/progs
 setenv INC_DIR   $DEV_DIR/progs/include
 setenv SRC_DIR   $DEV_DIR/progs/src
 setenv TEST_DIR  $DEV_DIR/progs/test
+setenv DOC_DIR   $DEV_DIR/progs/doc
+setenv DATA_DIR  $DEV_DIR/progs/data
 
 setenv SCRIPT_DIR $DEV_DIR/script
 
