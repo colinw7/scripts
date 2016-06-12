@@ -1,6 +1,28 @@
 #!/bin/csh -f
 
-CConcat $* > .all
+set files = ()
+set link  = 1
+
+while ($#argv > 0)
+  if      ("$1" == "-L") then
+    set link = 0
+    shift
+  else
+    set files = ($files $1)
+    shift
+  endif
+end
+
+if ($#files == 0) then
+  echo "No files"
+  exit 1
+endif
+
+if ($link == 1) then
+  CConcat $files > .all
+else
+  CConcat -L $files > .all
+endif
 
 vi .all
 
