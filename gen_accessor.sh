@@ -78,7 +78,7 @@ else
 endif
 
 if ($qt == 1) then
-  echo "  Q_PROPERTY($type READ $getter WRITE $setter)"
+  echo "  Q_PROPERTY($type $name READ $getter WRITE $setter)"
 endif
 
 if ($basic == 1) then
