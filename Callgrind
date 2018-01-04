@@ -1,0 +1,5 @@
+#!/bin/csh -f
+
+valgrind --tool=callgrind --dump-instr=yes --collect-jumps=yes $*
+
+exit 0

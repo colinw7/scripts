@@ -78,6 +78,10 @@ else
 endif
 
 if ($qt == 1) then
+  if ($type == "bool") then
+    set getter = "is${name2}"
+  endif
+
   echo "  Q_PROPERTY($type $name READ $getter WRITE $setter)"
 endif
 
@@ -89,8 +93,14 @@ if ($basic == 1) then
     set tmpVar = "i";
   else if ($type == "double") then
     set tmpVar = "r";
-  else if ($type == "std::string" || $type == "string") then
+  else if ($type == "std::string" || $type == "string" || $type == "QString") then
     set tmpVar = "s";
+  else if ($type == "QColor") then
+    set tmpVar = "c";
+  else if ($type == "QFont") then
+    set tmpVar = "f";
+  else if ($type == "QRect" || $type == "QRectF") then
+    set tmpVar = "r";
   endif
 
   if ($ptr == 0) then

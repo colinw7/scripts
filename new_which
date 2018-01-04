@@ -4,6 +4,7 @@ set all      = 0
 set alias    = 0
 set silent   = 0
 set follow   = 0
+set info     = 0
 set files    = ''
 set got_file = 0
 
@@ -20,6 +21,9 @@ while ($#argv > 0)
   else if ("$1" == "-f") then
     set follow = 1
     shift
+  else if ("$1" == "-I") then
+    set info = 1
+    shift
   else
     set files = ($files $1)
     set got_file = 1
@@ -27,7 +31,9 @@ while ($#argv > 0)
   endif
 end
 
-if ($silent == 0) then
+if      ($info == 1) then
+  set Echo = "ls -l"
+else if ($silent == 0) then
   set Echo = echo
 else
   set Echo = 'set temp ='

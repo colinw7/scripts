@@ -24,12 +24,17 @@ set diff        = 0
 set options   = ""
 set args      = ""
 set delfiles  = ()
+set diff_opts = ""
 set save_opts = ""
 
 while ($#argv > 0)
   if      ("$1" == "-diff") then
     set only_diff = 1
     set save_opts = ($save_opts $1:q)
+    shift
+  else if ("$1" == "-bw") then
+    set diff_opts = "-bw"
+    set save_opts = ($diff_opts $1:q)
     shift
   else if ("$1" == "-newer") then
     set newer     = 1
@@ -191,7 +196,8 @@ foreach file ($files)
             echo "${bold}Different $file${norm}"
 
             if ($diff == 1) then
-              diff $file:q $dest/$file
+              # echo "diff $diff_opts $file:q $dest/$file"
+              diff $diff_opts $file:q $dest/$file
             endif
           else
             echo -n "$file "
