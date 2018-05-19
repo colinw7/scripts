@@ -1,0 +1,27 @@
+#!/bin/csh -f
+
+set root   = $1:r
+set tkfile = $root.tk
+set kfile  = $root.k
+
+if (-z $tkfile) then
+  echo -n "" > $kfile
+  exit 0
+endif
+
+echo -n '' > $kfile
+
+echo 'static char '$root'_TK[] = "' | sed 's/$/\\n\\/' >> $kfile
+
+sed -e '/^$/d'         \
+    -e '/^[ 	]*#/d' \
+    -e 's/\\/\\\\/g'   \
+    -e 's/\"/\\\"/g'   \
+    -e 's/$/\\n\\/g'   \
+    $tkfile >> $kfile
+
+echo '";' >> $kfile
+
+echo "" >> $kfile
+
+exit 0
