@@ -14,7 +14,7 @@ set only_diff = 0
 set count     = 0
 set nolink    = 0
 set match     = 0
-set pattern   = ""
+set patterns  = ()
 set show_date = 0
 
 set options   = ""
@@ -42,7 +42,7 @@ while ($#argv > 0)
     set save_opts = ($save_opts $1:q)
     shift
 
-    set pattern   = $1
+    set patterns  = ($patterns:q $1:q)
     set save_opts = ($save_opts $1:q)
     shift
   else if ("$1" == "-bw") then
@@ -123,8 +123,15 @@ foreach file ($files)
         diff_files $save_opts $files1 $dest
       endif
     else
-      if ("$pattern" != "") then
-        set n = `echo $pattern | grep $file | wc -l`
+      if ($#patterns > 0) then
+        set n = 0
+
+        foreach pattern ($patterns)
+          if ($file =~ $pattern:q) then
+            set n = 1
+            break
+          endif
+        end
 
         if ($n == 0) then
           continue
