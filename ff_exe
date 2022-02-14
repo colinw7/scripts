@@ -1,0 +1,36 @@
+#!/bin/csh -f
+
+set short = 0
+
+while ($#argv > 0)
+  if ("$1" == "-s") then
+    set short = 1
+    shift
+  else
+    shift
+  endif
+end
+
+set files = `Cls --full_path -R --include x --exclude dl --nocolor`
+
+set efiles = ()
+
+foreach file ($files)
+  set c = `file $file | grep ELF | wc -l`
+
+  if ($c == 1) then
+    set efiles = ($efiles $file)
+  endif
+end
+
+if ($#efiles == 0) then
+  exit 0
+endif
+
+if ($short == 1) then
+  Cls --nocolor $efiles --format "%f"
+else
+  Cls $efiles --format "%f %s"
+endif
+
+exit 0

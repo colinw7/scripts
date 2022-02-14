@@ -1,0 +1,27 @@
+#!/bin/csh -f
+
+set nonomatch
+
+set files = `echo moc_*.cpp`
+
+if ("$files" == "moc_*.cpp") then
+  exit 1
+endif
+
+set mfiles = ()
+
+foreach file ($files)
+  set cfile = `echo $file | sed 's/moc_//'`
+  set hfile = `echo $file | sed 's/moc_\(.*\)\.cpp/\1.h/'`
+
+  if (! -e $cfile && ! -e $hfile) then
+    set mfiles = ($mfiles $file)
+  endif
+end
+
+if ($#mfiles > 0) then
+  echo "Bad moc files:"
+  echo "  $mfiles"
+endif
+
+exit 0

@@ -1,0 +1,25 @@
+#!/bin/csh -f
+
+set uniq = 1
+set args = ()
+
+while ($#argv > 0)
+  if      ("$1" == "-u") then
+    set uniq = 1
+    shift
+  else if ("$1" == "-a") then
+    set uniq = 0
+    shift
+  else
+    set args = ($args $1:q)
+    shift
+  endif
+end
+
+if ($uniq) then
+  awk -F: '{print $1}' | sort | uniq
+else
+  awk -F: '{print $1}'
+endif
+
+exit 0

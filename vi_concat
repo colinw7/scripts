@@ -2,10 +2,14 @@
 
 set files = ()
 set link  = 1
+set view  = 0
 
 while ($#argv > 0)
   if      ("$1" == "-L") then
     set link = 0
+    shift
+  else if ("$1" == "-v") then
+    set view = 1
     shift
   else
     set files = ($files $1)
@@ -24,7 +28,11 @@ else
   CConcat -L $files > .all
 endif
 
-vi .all
+if ($view == 1) then
+  view .all
+else
+  vi .all
+endif
 
 CUnconcat .all
 

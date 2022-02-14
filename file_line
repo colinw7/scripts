@@ -1,0 +1,13 @@
+#!/bin/csh -f
+
+if ($#argv != 2) then
+  echo "Usage: file_line <file> <line>"
+  exit 0
+endif
+
+set file = $1:q
+set line = $2:q
+
+awk "NR==$line" $file
+
+exit 0
