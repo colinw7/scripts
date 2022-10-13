@@ -82,6 +82,10 @@ init()
   connect(answerButton_, SIGNAL(pressed()), this, SLOT(answerSlot()));
   connect(passButton_, SIGNAL(pressed()), this, SLOT(passSlot()));
   connect(failButton_, SIGNAL(pressed()), this, SLOT(failSlot()));
+
+  //---
+
+  updateState();
 }
 
 CQUSCitizen::
@@ -336,10 +340,10 @@ passSlot()
 
   questionIds_.erase(questionId_);
 
-  if (questionIds_.empty())
-    return;
-
-  nextQuestion();
+  if (! questionIds_.empty())
+    nextQuestion();
+  else
+    updateState();
 }
 
 void
@@ -366,7 +370,7 @@ nextQuestion()
 
   showAnswer_ = false;
 
-  update();
+  updateState();
 }
 
 void
@@ -374,6 +378,17 @@ CQUSCitizen::
 answerSlot()
 {
   showAnswer_ = true;
+
+  updateState();
+}
+
+void
+CQUSCitizen::
+updateState()
+{
+  answerButton_->setEnabled(! showAnswer_);
+  passButton_  ->setEnabled(showAnswer_);
+  failButton_  ->setEnabled(showAnswer_);
 
   update();
 }

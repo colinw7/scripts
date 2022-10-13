@@ -42,6 +42,8 @@ class CQUSCitizen : public QWidget {
 
   void nextQuestion();
 
+  void updateState();
+
  private slots:
   void answerSlot();
   void passSlot();
